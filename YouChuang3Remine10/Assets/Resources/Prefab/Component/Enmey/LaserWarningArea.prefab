@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6281510206407592924
 Transform:
   m_ObjectHideFlags: 0
@@ -40,7 +40,7 @@ Transform:
   - {fileID: 3161666631079448333}
   - {fileID: 6528451507195834362}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &904431961359181699
 PrefabInstance:
