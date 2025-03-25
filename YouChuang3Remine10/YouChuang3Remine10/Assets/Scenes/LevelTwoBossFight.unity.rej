@@ -1,0 +1,10 @@
+diff a/YouChuang3Remine10/YouChuang3Remine10/Assets/Scenes/LevelTwoBossFight.unity b/YouChuang3Remine10/YouChuang3Remine10/Assets/Scenes/LevelTwoBossFight.unity	(rejected hunks)
+@@ -299,7 +299,7 @@
+   m_Icon: {fileID: 0}
+   m_NavMeshLayer: 0
+   m_StaticEditorFlags: 0
+-  m_IsActive: 1
++  m_IsActive: 0
+ --- !u!212 &24173508
+ SpriteRenderer:
+   m_ObjectHideFlags: 0
