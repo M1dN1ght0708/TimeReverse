@@ -10304,14 +10304,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2640744897950270444, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6985245592678298793, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
-      propertyPath: m_Intensity
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8641408817826618484, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
       propertyPath: m_Name
       value: Boss2
@@ -10329,10 +10321,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1992302334}
     - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
-      propertyPath: skill2AimTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
       propertyPath: skill3TargetL
       value: 
       objectReference: {fileID: 1779253432}
@@ -10349,29 +10337,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 207025910}
     - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
-      propertyPath: skill2MaxCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
-      propertyPath: skill4WarnTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
       propertyPath: explosionEffect
       value: 
       objectReference: {fileID: 501704673}
     - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
-      propertyPath: skill2DeltaTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
       propertyPath: skill4WarnEffect
       value: 
       objectReference: {fileID: 765483818}
-    - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
-      propertyPath: skill3BulletDeltaTime
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
       propertyPath: targets.Array.data[0]
       value: 
