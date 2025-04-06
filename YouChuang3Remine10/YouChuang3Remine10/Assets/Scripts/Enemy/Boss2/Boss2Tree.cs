@@ -58,6 +58,8 @@ public class Boss2Tree : BehaviorTree.Tree
     public float skill4MoveSpeed;
     public float skill4DashDistance;
     public float skill4WarnTime;
+    private Coroutine dashShadowCoro;
+    public float shadowDelta;
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>
@@ -144,6 +146,25 @@ public class Boss2Tree : BehaviorTree.Tree
         {
             aimEffect.transform.position = this.playerTrans.position + new Vector3(0, 2, 0);
             yield return new WaitForSeconds(this.aimDelayTime);           
+        }
+    }
+
+    public void TriggerShadow()
+    {
+        this.dashShadowCoro = StartCoroutine(TriggerShadowCoro());
+    }
+    public void EndShadow()
+    {
+        StopCoroutine(dashShadowCoro);
+        print("stopcoro");
+    }
+
+    IEnumerator TriggerShadowCoro()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(this.shadowDelta);
+            PoolManager.Instance.GetObj("Shadow/PlaneShadow");
         }
     }
 }

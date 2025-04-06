@@ -116,7 +116,7 @@ namespace Boos2Tasks
                     b2Tree.skillID = 3;
                 else
                     b2Tree.skillID = 4;
-                b2Tree.skillID = 1;
+                //b2Tree.skillID = 4;
             }
               
             return NodeState.Success;
@@ -438,6 +438,7 @@ namespace Boos2Tasks
         private float dashDir;
         private bool isDash;
         private float nowWarnTime = 0;
+        private bool isTriggerShadow;
 
         public SkillFourTask() { }
         public SkillFourTask(Transform boss2Trans)
@@ -512,7 +513,13 @@ namespace Boos2Tasks
             {
                 b2Tree.sprite.flipX = true;
             }
+            if(!isTriggerShadow)
+            {
+                isTriggerShadow = true;
+                b2Tree.TriggerShadow();                
+            }
             b2Tree.animator.Play("PlaneDash");
+
         }
         private void DashAndAttack()
         {
@@ -539,6 +546,7 @@ namespace Boos2Tasks
             }
             else
             {
+                b2Tree.EndShadow();
                 this.nowWarnTime = 0;
                 this.moveTargetIndex = 0;
                 this.dashDir = 0;
@@ -546,6 +554,7 @@ namespace Boos2Tasks
                 this.nowMoveDis = 0;
                 b2Tree.canMove = true;
                 this.isDash = false;
+                this.isTriggerShadow=false;
             }
 
         }

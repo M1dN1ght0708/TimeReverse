@@ -878,6 +878,8 @@ MonoBehaviour:
   playerTrans: {fileID: 0}
   aimEffect: {fileID: 0}
   explosionEffect: {fileID: 0}
+  aimDelayTime: 0.3
+  isAim: 0
   skill1AimTime: 2
   nowAimTime1: 0
   skill1ExplosionTime: 1.5
@@ -905,6 +907,7 @@ MonoBehaviour:
   skill4MoveSpeed: 15
   skill4DashDistance: 60
   skill4WarnTime: 4
+  shadowDelta: 0.1
 --- !u!1 &8696924133418169139
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,14 @@ public class PlaneWarningMovement : MonoBehaviour
     }
     void OnEnable()
     {
-        this.transform.position=new Vector3(0,this.transform.position.y, this.transform.position.z);
+        if(moveDir>0)
+        {
+            this.transform.position = new Vector3(-40, this.transform.position.y, this.transform.position.z);
+        }       
+        else
+        {
+            this.transform.position = new Vector3(40, this.transform.position.y, this.transform.position.z);
+        }
         this.coroutine=StartCoroutine(MoveObjectRoutine());
     }
     void OnDisable()
