@@ -32,7 +32,16 @@ namespace Boos2Tasks
             {
                 b2Tree.skillID = 0;
                 b2Tree.canMove = false;
-                b2Tree.nowIndex = this.targetIndex;               
+                b2Tree.nowIndex = this.targetIndex;
+                if(moveDir.x==0)
+                {
+                    b2Tree.animator.Play("PlaneDowntoIdle");
+                }
+                else
+                {
+                    b2Tree.animator.Play("PlaneLefttoIdle");
+                }
+                
             }
             return NodeState.Running;
         }
@@ -45,12 +54,26 @@ namespace Boos2Tasks
                     this.targetIndex = UnityEngine.Random.Range(0, 5);                   
                 }
                 b2Tree.targetIndex = this.targetIndex;
-                this.targetPos = b2Tree.targets[this.targetIndex].position;
-                //根据方向不同播放移动动画：
-
+                this.targetPos = b2Tree.targets[this.targetIndex].position;               
                 //移动：
                 moveDir = (targetPos - this.b2Trans.position).normalized;
                 b2Trans.Translate(moveDir * b2Tree.speed * Time.deltaTime, Space.Self);
+                //根据方向不同播放移动动画：
+                if(moveDir.x < 0)
+                {
+                   b2Tree.sprite.flipX = false;
+                   b2Tree.animator.Play("PlaneLeft");
+                }
+                else if(moveDir.x > 0)  
+                {
+                    b2Tree.sprite.flipX=true;
+                    b2Tree.animator.Play("PlaneLeft");
+                }
+                else
+                {
+                    b2Tree.animator.Play("PlaneDown");
+                }
+
             }
         }
 
@@ -93,7 +116,7 @@ namespace Boos2Tasks
                     b2Tree.skillID = 3;
                 else
                     b2Tree.skillID = 4;
-                //b2Tree.skillID = 4;
+                b2Tree.skillID = 1;
             }
               
             return NodeState.Success;
@@ -135,18 +158,25 @@ namespace Boos2Tasks
             if (b2Tree.nowAimTime1>0)
             {
                 b2Tree.nowAimTime1 -= Time.deltaTime;
-                b2Tree.aimEffect.transform.position=playerTrans.position+new Vector3(0,2,0);
+                //b2Tree.aimEffect.transform.position=playerTrans.position+new Vector3(0,2,0);
+                if(!b2Tree.isAim)
+                {
+                    b2Tree.isAim = true;
+                    b2Tree.StartAim();
+                }            
                 targetPos = b2Tree.aimEffect.transform.position;
                 b2Tree.aimEffect.SetActive(true);
             }
             else
-            {                
-                if(b2Tree.nowExplosionTime>0)
+            {
+                b2Tree.EndAim();
+                b2Tree.animator.Play("PlaneShoot");
+                if (b2Tree.nowExplosionTime>0)
                 {
                     b2Tree.nowExplosionTime-=Time.deltaTime;
                 }
                 else
-                {
+                {              
                     b2Tree.aimEffect.SetActive(false);
                     b2Tree.explosionEffect.transform.position = targetPos;
                     b2Tree.explosionEffect.SetActive(true);
@@ -154,7 +184,8 @@ namespace Boos2Tasks
                     //b2Tree.skillID = 0;
                     b2Tree.nowAimTime1 = b2Tree.skill1AimTime;
                     b2Tree.nowExplosionTime=b2Tree.skill1ExplosionTime;
-                    b2Tree.HideExplosion();
+                    b2Tree.HideExplosion();                    
+                    b2Tree.isAim=false;
                 }                
             }
             
@@ -167,11 +198,13 @@ namespace Boos2Tasks
         private Boss2Tree b2Tree;
         private Animator b2Animator;
         private Transform b2Trans;
+        private bool isAttack;
 
         private Transform playerTrans;
         private Vector3 targetPos;
         private float deltaTime;
         private Vector3 moveDir;
+
 
         public SkillTwoTask() { }
         public SkillTwoTask(Transform boss2Trans)
@@ -188,6 +221,22 @@ namespace Boos2Tasks
                 return NodeState.Failure;
             if (Mathf.Abs(b2Tree.skill2Target.position.x - this.b2Trans.position.x) < 0.5f && Mathf.Abs(b2Tree.skill2Target.position.y - this.b2Trans.position.y) < 0.5f)
             {
+                if(moveDir.x==0)
+                {
+                    if(!isAttack)
+                    {
+                        b2Tree.animator.Play("PlaneUptoIdle");
+                        isAttack = true;
+                    }                   
+                }
+                else
+                {
+                    if (!isAttack)
+                    {
+                        b2Tree.animator.Play("PlaneLefttoIdle");
+                        isAttack = true;
+                    }                    
+                }
                 this.AimPlayer();
             }
             else
@@ -202,6 +251,21 @@ namespace Boos2Tasks
         {
             moveDir=(b2Tree.skill2Target.position-this.b2Trans.position).normalized;
             b2Trans.Translate(moveDir*b2Tree.skill2MoveSpeed*Time.deltaTime,Space.Self);
+            if (moveDir.x < 0)
+            {
+                b2Tree.sprite.flipX = false;
+                b2Tree.animator.Play("PlaneLeft");
+            }
+            else if (moveDir.x > 0)
+            {
+                b2Tree.sprite.flipX = true;
+                b2Tree.animator.Play("PlaneLeft");
+            }
+            else
+            {
+                b2Tree.animator.Play("PlaneUp");
+            }
+            
 
         }
         private void AimPlayer()
@@ -210,23 +274,14 @@ namespace Boos2Tasks
             {
                 if(deltaTime >= b2Tree.skill2DeltaTime)
                 {
-                    if (b2Tree.nowAimTime2 > 0)
-                    {
-                        b2Tree.nowAimTime2 -= Time.deltaTime;
-                        b2Tree.aimEffect.transform.position = playerTrans.position + new Vector3(0, 2, 0);
-                        targetPos = playerTrans.position;
-                        b2Tree.aimEffect.SetActive(true);
-                    }
-                    else
-                    {
-                        deltaTime = 0;
-                        b2Tree.skill2NowCount--;
-                        b2Tree.aimEffect.SetActive(false);
-                        GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
-                        rocketObj.transform.position = new Vector3(targetPos.x, targetPos.y + 20f, targetPos.z);
-                        rocketObj.GetComponent<STRocket>().landSpeed = b2Tree.skill2BulletSpeed;
-                        b2Tree.nowAimTime2 = b2Tree.skill2AimTime;
-                    }
+
+                    targetPos = playerTrans.position;
+                    deltaTime = 0;
+                    b2Tree.skill2NowCount--;
+                    b2Tree.animator.Play("PlaneRocket");
+                    GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
+                    rocketObj.transform.position = new Vector3(targetPos.x, b2Trans.position.y, targetPos.z);
+                    rocketObj.GetComponent<STRocket>().landSpeed = b2Tree.skill2BulletSpeed;
                 }
                 else
                 {
@@ -291,6 +346,7 @@ namespace Boos2Tasks
                 && Mathf.Abs(this.moveTargetPos.y - this.b2Trans.position.y) < 0.1f)
                 ||isDash)
             {
+                //b2Tree.animator.Play("PlaneLefttoIdle");
                 isDash = true;
                 this.DashAndBullet();
             }
@@ -307,12 +363,29 @@ namespace Boos2Tasks
         {
             moveDir = (this.moveTargetPos - this.b2Trans.position).normalized;
             b2Trans.Translate(moveDir * b2Tree.skill3MoveSpeed * Time.deltaTime, Space.Self);
+            if (moveDir.x < 0)
+            {
+                b2Tree.sprite.flipX = false;
+            }
+            else if (moveDir.x > 0)
+            {
+                b2Tree.sprite.flipX = true;                
+            }
+            b2Tree.animator.Play("PlaneLeft");
 
         }
 
         private void Skill3Dash()
         {
-
+            if(dashDir<0)
+            {
+                b2Tree.sprite.flipX = false;
+            }
+            else
+            {
+                b2Tree.sprite.flipX=true;
+            }         
+            b2Tree.animator.Play("PlaneDash");
             b2Trans.Translate(this.dashDir*Vector3.right*b2Tree.skill3DashSpeed * Time.deltaTime, Space.Self);
             //Debug.Log(dashDir);
             this.nowMoveDis += b2Tree.skill3DashSpeed * Time.deltaTime;
@@ -396,22 +469,32 @@ namespace Boos2Tasks
                 && Mathf.Abs(this.moveTargetPos.y - this.b2Trans.position.y) < 0.1f)
                 || isDash)
             {
+                //b2Tree.animator.Play("PlaneLefttoIdle");
                 isDash = true;
                 this.DashAndAttack();
             }
             else
             {
                 if (!isDash)
-                    this.SkillThreeMove();
+                    this.SkillFourMove();
             }
 
             return NodeState.Success;
         }
 
-        public void SkillThreeMove()
+        public void SkillFourMove()
         {
             moveDir = (this.moveTargetPos - this.b2Trans.position).normalized;
             b2Trans.Translate(moveDir * b2Tree.skill3MoveSpeed * Time.deltaTime, Space.Self);
+            if (moveDir.x < 0)
+            {
+                b2Tree.sprite.flipX = false;
+            }
+            else if (moveDir.x > 0)
+            {
+                b2Tree.sprite.flipX = true;
+            }
+            b2Tree.animator.Play("PlaneLeft");
 
         }
 
@@ -421,6 +504,15 @@ namespace Boos2Tasks
             b2Trans.Translate(this.dashDir * Vector3.right * b2Tree.skill4DashSpeed * Time.deltaTime, Space.Self);
             //Debug.Log(dashDir);
             this.nowMoveDis += b2Tree.skill4DashSpeed * Time.deltaTime;
+            if (dashDir < 0)
+            {
+                b2Tree.sprite.flipX = false;
+            }
+            else
+            {
+                b2Tree.sprite.flipX = true;
+            }
+            b2Tree.animator.Play("PlaneDash");
         }
         private void DashAndAttack()
         {

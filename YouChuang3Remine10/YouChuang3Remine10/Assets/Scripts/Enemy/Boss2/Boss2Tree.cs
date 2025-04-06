@@ -7,8 +7,12 @@ using Boos2Tasks;
 public class Boss2Tree : BehaviorTree.Tree
 {
     public Dictionary<string, object> blackBoard = new Dictionary<string, object>();
+    [Header("动画")]
+    public SpriteRenderer sprite;
+    public Animator animator;
+    public int moveAniIndex;
+    public int dashAniIndex;
     [Header("移动")]
-
     public float speed;
     public Transform[] targets;
     public int nowIndex = 0;
@@ -21,10 +25,13 @@ public class Boss2Tree : BehaviorTree.Tree
     public GameObject aimEffect;
     public GameObject explosionEffect;
     [Header("技能一")]
+    public float aimDelayTime;
+    public bool isAim;
     public float skill1AimTime;
     public float nowAimTime1;
     public float skill1ExplosionTime;
     public float nowExplosionTime;
+    private Coroutine aimCoroutine;
     [Header("技能二")]
     public float skill2AimTime;
     public float nowAimTime2;
@@ -123,5 +130,20 @@ public class Boss2Tree : BehaviorTree.Tree
 
     }
 
-
+    public void StartAim()
+    {
+      aimCoroutine=StartCoroutine(AimCoroutine());
+    }
+    public void EndAim()
+    {
+        StopCoroutine(aimCoroutine);
+    }
+    IEnumerator AimCoroutine()
+    {
+        while(true)
+        {
+            aimEffect.transform.position = this.playerTrans.position + new Vector3(0, 2, 0);
+            yield return new WaitForSeconds(this.aimDelayTime);           
+        }
+    }
 }
