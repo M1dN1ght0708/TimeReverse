@@ -10330,6 +10330,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 675594423}
     - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
+      propertyPath: aimDelayTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
       propertyPath: skill2Target
       value: 
       objectReference: {fileID: 1992302334}
@@ -10353,6 +10357,10 @@ PrefabInstance:
       propertyPath: explosionEffect
       value: 
       objectReference: {fileID: 501704673}
+    - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
+      propertyPath: skill4DashSpeed
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
       propertyPath: skill4WarnEffect
       value: 
