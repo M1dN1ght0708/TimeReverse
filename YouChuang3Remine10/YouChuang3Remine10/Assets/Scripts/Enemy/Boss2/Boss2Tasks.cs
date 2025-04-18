@@ -116,7 +116,8 @@ namespace Boos2Tasks
                     b2Tree.skillID = 3;
                 else
                     b2Tree.skillID = 4;
-                //b2Tree.skillID = 4;
+                if(b2Tree.testSkillID!=0)
+                    b2Tree.skillID = b2Tree.testSkillID;
             }
               
             return NodeState.Success;
@@ -219,7 +220,9 @@ namespace Boos2Tasks
         {
             if (b2Tree.skillID != 2)
                 return NodeState.Failure;
-            if (Mathf.Abs(b2Tree.skill2Target.position.x - this.b2Trans.position.x) < 0.5f && Mathf.Abs(b2Tree.skill2Target.position.y - this.b2Trans.position.y) < 0.5f)
+            if ((Mathf.Abs(b2Tree.skill2Target.position.x - this.b2Trans.position.x) < 0.5f 
+                && Mathf.Abs(b2Tree.skill2Target.position.y - this.b2Trans.position.y) < 0.5f)||
+                isAttack)
             {
                 if(moveDir.x==0)
                 {
@@ -236,14 +239,16 @@ namespace Boos2Tasks
                         b2Tree.animator.Play("PlaneLefttoIdle");
                         isAttack = true;
                     }                    
-                }
+                }               
                 this.AimPlayer();
             }
             else
             {
-                this.SkillTwoMove();
+                if(!isAttack)
+                    this.SkillTwoMove();
             }
-           
+            if(isAttack)
+                this.TracePlayerMove();
             return NodeState.Success;
         }
 
@@ -268,11 +273,16 @@ namespace Boos2Tasks
             
 
         }
-        private void AimPlayer()
+        private void TracePlayerMove()
         {
-            if(b2Tree.skill2NowCount>0)
-            {
-                if(deltaTime >= b2Tree.skill2DeltaTime)
+            moveDir=new Vector3(playerTrans.position.x-b2Trans.position.x,0,0);
+            b2Trans.Translate(moveDir * b2Tree.skill2MoveSpeed * Time.deltaTime, Space.Self);
+        }
+        private void AimPlayer()
+        {            
+            if (b2Tree.skill2NowCount>0)
+            {             
+                if (deltaTime >= b2Tree.skill2DeltaTime)
                 {
 
                     targetPos = playerTrans.position;
@@ -280,7 +290,7 @@ namespace Boos2Tasks
                     b2Tree.skill2NowCount--;
                     b2Tree.animator.Play("PlaneRocket");
                     GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
-                    rocketObj.transform.position = new Vector3(targetPos.x, b2Trans.position.y, targetPos.z);
+                    rocketObj.transform.position = new Vector3(b2Trans.position.x, b2Trans.position.y-3, -1.2f);
                     rocketObj.GetComponent<STRocket>().landSpeed = b2Tree.skill2BulletSpeed;
                 }
                 else
@@ -295,6 +305,7 @@ namespace Boos2Tasks
                 b2Tree.skillID = 0;
                 b2Tree.skill2NowCount = b2Tree.skill2MaxCount;
                 b2Tree.canMove = true;
+                isAttack = false;
             }                
 
         }
@@ -400,7 +411,7 @@ namespace Boos2Tasks
 
                     deltaTime = 0;
                     GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
-                    rocketObj.transform.position =this.b2Trans.transform.position;
+                    rocketObj.transform.position =new Vector3(this.b2Trans.transform.position.x, this.b2Trans.transform.position.y,-1.2f);
                     rocketObj.GetComponent<STRocket>().landSpeed = b2Tree.skill2BulletSpeed;
                 }
                 else
@@ -439,7 +450,7 @@ namespace Boos2Tasks
         private bool isDash;
         private float nowWarnTime = 0;
         private bool isTriggerShadow;
-
+        private float dashY;
         public SkillFourTask() { }
         public SkillFourTask(Transform boss2Trans)
         {
@@ -471,7 +482,25 @@ namespace Boos2Tasks
                 || isDash)
             {
                 //b2Tree.animator.Play("PlaneLefttoIdle");
-                isDash = true;
+                if(!isDash)
+                {
+                    isDash = true;
+                    dashY=b2Tree.playerTrans.position.y+3;
+                    if(dashY>b2Tree.maxDashY)
+                    {
+                        dashY = b2Tree.maxDashY;
+                        b2Trans.position = new Vector3(b2Trans.position.x, dashY, b2Trans.position.z);
+                    }
+                    else if(dashY<b2Tree.minDashY) 
+                    { 
+                        dashY=b2Tree.minDashY;
+                        b2Trans.position = new Vector3(b2Trans.position.x, dashY+2, b2Trans.position.z);
+                    }
+                    else
+                    {
+                        b2Trans.position = new Vector3(b2Trans.position.x, dashY, b2Trans.position.z);
+                    }
+                }                
                 this.DashAndAttack();
             }
             else
@@ -508,10 +537,12 @@ namespace Boos2Tasks
             if (dashDir < 0)
             {
                 b2Tree.sprite.flipX = false;
+                b2Tree.dashAttackL.SetActive(true);
             }
             else
             {
                 b2Tree.sprite.flipX = true;
+                b2Tree.dashAttackR.SetActive(true);
             }
             if(!isTriggerShadow)
             {
@@ -528,6 +559,7 @@ namespace Boos2Tasks
                 if(this.nowWarnTime < b2Tree.skill4WarnTime)
                 {
                     b2Tree.skill4WarnEffect.GetComponent<PlaneWarningMovement>().moveDir = this.dashDir;
+                    b2Tree.skill4WarnEffect.GetComponent<PlaneWarningMovement>().warnningY = this.dashY;
                     SpriteRenderer[] sr= b2Tree.skill4WarnEffect.GetComponentsInChildren<SpriteRenderer>();
                     for (int i = 0;i<sr.Length;i++)
                     {
@@ -546,6 +578,8 @@ namespace Boos2Tasks
             }
             else
             {
+                b2Tree.dashAttackL.SetActive(false);
+                b2Tree.dashAttackR.SetActive(false);
                 b2Tree.EndShadow();
                 this.nowWarnTime = 0;
                 this.moveTargetIndex = 0;

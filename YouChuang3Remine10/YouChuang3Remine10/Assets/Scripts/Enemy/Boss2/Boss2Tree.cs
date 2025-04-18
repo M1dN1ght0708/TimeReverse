@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
 using Boos2Tasks;
+using Aura2API;
 
 public class Boss2Tree : BehaviorTree.Tree
 {
     public Dictionary<string, object> blackBoard = new Dictionary<string, object>();
+    [Header("UI相关")]
+    public GameObject hpFadeObj;
+    public GameObject hpObj;
+    [Header("受击特效")]
+    public GameObject hurtEffectBlade;
+    public GameObject hurtEffectBullet;
     [Header("动画")]
     public SpriteRenderer sprite;
     public Animator animator;
@@ -20,11 +27,14 @@ public class Boss2Tree : BehaviorTree.Tree
     public bool canMove = true;
     public float moveDelta;
     [Header("技能相关")]
+    public int testSkillID=0;
     public int skillID;
     public Transform playerTrans;
     public GameObject aimEffect;
     public GameObject explosionEffect;
-    [Header("技能一")]
+    [Header("技能一")]   
+    public float aimMoveSpeed=1;
+    private Vector3 skillOneTraceDir;
     public float aimDelayTime;
     public bool isAim;
     public float skill1AimTime;
@@ -51,6 +61,10 @@ public class Boss2Tree : BehaviorTree.Tree
     public float skill3BulletDeltaTime;
     public float skill3DashDistance;
     [Header("技能四")]
+    public GameObject dashAttackL;
+    public GameObject dashAttackR;
+    public float maxDashY;
+    public float minDashY;
     public GameObject skill4WarnEffect;
     public Transform skill4TargetL;
     public Transform skill4TargetR;
@@ -88,6 +102,7 @@ public class Boss2Tree : BehaviorTree.Tree
 
         nowAimTime2 = skill2AimTime;
         skill2NowCount = skill2MaxCount;
+        Invoke("ShowHpUI", 5f);
     }
     protected override void Update()
     {
@@ -134,7 +149,8 @@ public class Boss2Tree : BehaviorTree.Tree
 
     public void StartAim()
     {
-      aimCoroutine=StartCoroutine(AimCoroutine());
+        aimEffect.transform.position = this.playerTrans.position + new Vector3(2, 3, 0);
+        aimCoroutine =StartCoroutine(AimCoroutine());
     }
     public void EndAim()
     {
@@ -144,7 +160,9 @@ public class Boss2Tree : BehaviorTree.Tree
     {
         while(true)
         {
-            aimEffect.transform.position = this.playerTrans.position + new Vector3(0, 2, 0);
+            skillOneTraceDir = this.playerTrans.position + new Vector3(0, 2, 0)- aimEffect.transform.position;
+            //aimEffect.transform.position = this.playerTrans.position + new Vector3(0, 2, 0);
+            aimEffect.transform.Translate(skillOneTraceDir * aimMoveSpeed * Time.deltaTime, Space.Self);
             yield return new WaitForSeconds(this.aimDelayTime);           
         }
     }
@@ -166,5 +184,35 @@ public class Boss2Tree : BehaviorTree.Tree
             yield return new WaitForSeconds(this.shadowDelta);
             PoolManager.Instance.GetObj("Shadow/PlaneShadow");
         }
+    }
+
+    public void GetHurt(Transform attackTrans, bool attackType = false)
+    {
+        if (attackType)
+        {
+            hurtEffectBullet.SetActive(true);
+            AudioMgr.Instance.PlaySoundNew(AudioID.mHurtBullet);
+        }
+        else
+        {
+            hurtEffectBlade.SetActive(true);
+            AudioMgr.Instance.PlaySoundNew(AudioID.mHurtBlade);
+        }
+        Invoke("HideHurtEffect", 0.2f);
+    }
+    private void HideHurtEffect()
+    {      
+        hurtEffectBlade.SetActive(false);
+        hurtEffectBullet.SetActive(false);
+    }
+    public void GetDead()
+    {
+        this.gameObject.Destroy();
+    }
+
+    private void ShowHpUI()
+    {
+        hpFadeObj.SetActive(true);
+        hpObj.SetActive(true);
     }
 }

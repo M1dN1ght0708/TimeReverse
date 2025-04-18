@@ -304,6 +304,33 @@ public partial class @PlayerControllerInput: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThrowDir"",
+                    ""type"": ""Value"",
+                    ""id"": ""d6314dcb-0a0e-432d-a7a7-ac2a3530a6d4"",
+                    ""expectedControlType"": ""Double"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ThrowBomb"",
+                    ""type"": ""Button"",
+                    ""id"": ""dbdafc23-1f82-4c5f-94eb-97c02d236ab3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickBomb"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c34b327-49e1-4007-97d4-d750814c219c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -315,6 +342,127 @@ public partial class @PlayerControllerInput: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""855c5b6d-9af7-49fe-9183-495c5c3a8798"",
+                    ""path"": ""Dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e4bd50cb-15e1-4565-b3d1-818f3ebf1b7b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9004174d-2829-45f7-b06e-bb1aeb33b149"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9ec1e1ae-82ed-4a48-8831-fb55a59eade7"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5d7ba560-2f57-4429-85b2-543b80d70082"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""11f2d8dd-a176-4526-982d-284eee2b46c0"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fae0f964-e99a-4031-bb0e-b3ae17763454"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""2d2ced07-c0f7-4f87-9005-70e659358c5b"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""770b8570-5c86-45cb-ab12-db8c8a7043cd"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ec73c5a-d394-4478-8591-e9eedb134353"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowBomb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7df3e5d2-970f-4464-ad23-68ff9e756de9"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickBomb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -396,6 +544,9 @@ public partial class @PlayerControllerInput: IInputActionCollection2, IDisposabl
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Interact = m_UI.FindAction("Interact", throwIfNotFound: true);
+        m_UI_ThrowDir = m_UI.FindAction("ThrowDir", throwIfNotFound: true);
+        m_UI_ThrowBomb = m_UI.FindAction("ThrowBomb", throwIfNotFound: true);
+        m_UI_PickBomb = m_UI.FindAction("PickBomb", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -552,11 +703,17 @@ public partial class @PlayerControllerInput: IInputActionCollection2, IDisposabl
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Interact;
+    private readonly InputAction m_UI_ThrowDir;
+    private readonly InputAction m_UI_ThrowBomb;
+    private readonly InputAction m_UI_PickBomb;
     public struct UIActions
     {
         private @PlayerControllerInput m_Wrapper;
         public UIActions(@PlayerControllerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Interact => m_Wrapper.m_UI_Interact;
+        public InputAction @ThrowDir => m_Wrapper.m_UI_ThrowDir;
+        public InputAction @ThrowBomb => m_Wrapper.m_UI_ThrowBomb;
+        public InputAction @PickBomb => m_Wrapper.m_UI_PickBomb;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -569,6 +726,15 @@ public partial class @PlayerControllerInput: IInputActionCollection2, IDisposabl
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @ThrowDir.started += instance.OnThrowDir;
+            @ThrowDir.performed += instance.OnThrowDir;
+            @ThrowDir.canceled += instance.OnThrowDir;
+            @ThrowBomb.started += instance.OnThrowBomb;
+            @ThrowBomb.performed += instance.OnThrowBomb;
+            @ThrowBomb.canceled += instance.OnThrowBomb;
+            @PickBomb.started += instance.OnPickBomb;
+            @PickBomb.performed += instance.OnPickBomb;
+            @PickBomb.canceled += instance.OnPickBomb;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -576,6 +742,15 @@ public partial class @PlayerControllerInput: IInputActionCollection2, IDisposabl
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @ThrowDir.started -= instance.OnThrowDir;
+            @ThrowDir.performed -= instance.OnThrowDir;
+            @ThrowDir.canceled -= instance.OnThrowDir;
+            @ThrowBomb.started -= instance.OnThrowBomb;
+            @ThrowBomb.performed -= instance.OnThrowBomb;
+            @ThrowBomb.canceled -= instance.OnThrowBomb;
+            @PickBomb.started -= instance.OnPickBomb;
+            @PickBomb.performed -= instance.OnPickBomb;
+            @PickBomb.canceled -= instance.OnPickBomb;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -651,5 +826,8 @@ public partial class @PlayerControllerInput: IInputActionCollection2, IDisposabl
     public interface IUIActions
     {
         void OnInteract(InputAction.CallbackContext context);
+        void OnThrowDir(InputAction.CallbackContext context);
+        void OnThrowBomb(InputAction.CallbackContext context);
+        void OnPickBomb(InputAction.CallbackContext context);
     }
 }

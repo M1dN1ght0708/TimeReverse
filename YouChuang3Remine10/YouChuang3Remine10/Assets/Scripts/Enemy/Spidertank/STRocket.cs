@@ -46,6 +46,7 @@ public class STRocket : BaseGameLevel
             Invoke("PushEffect", 1f);
             PoolManager.Instance.PushObj("Bullet/EnemyBullet/STRocket", this.gameObject);
         }
+
     }
 
     protected override void StopTimeDo()

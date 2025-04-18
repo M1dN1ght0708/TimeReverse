@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour
     public int jumpShootMax;
     public int jumpShootCounter;
     [Header("交互相关")]
-    public static bool isPause;
     //是否可以对话
     public bool canDialogue;
     //是否可以切换场景
@@ -115,6 +114,15 @@ public class PlayerController : MonoBehaviour
     //记录上一个检查点
     public Transform lastCheckPoint;
     public bool isReturnCheckPoint;
+    //投掷炸弹
+    //投掷方向
+    private Vector3 throwDir;
+    private bool hasThrowDir;
+    public static bool isPause;
+    public bool canPick;
+    public bool canThrow;
+    public GameObject boss2BombObj;
+    public GameObject throwTipsObj;
     [Header("受伤")]
     public bool isDead;
     public bool isHurt;
@@ -155,6 +163,11 @@ public class PlayerController : MonoBehaviour
         playerInput.GamePlay.Attack.started += playerAttackNew;
         playerInput.GamePlay.Dash.started += playerReadyToDash;
         playerInput.UI.Interact.started += playerInteract;
+        //投掷
+        playerInput.UI.PickBomb.started += playerPickBomb;
+        playerInput.UI.ThrowDir.performed += playerThrowDir;
+        playerInput.UI.ThrowDir.canceled += playerThrowCancel;
+        playerInput.UI.ThrowBomb.started += playerThrowBomb;
 
         #endregion
         #region 事件监听
@@ -209,6 +222,17 @@ public class PlayerController : MonoBehaviour
         playerAttackInput();
         //判断是否播放收枪动画
         playerCanEndShoot();
+
+        if(canThrow&&boss2BombObj!=null)
+        {
+            boss2BombObj.transform.position = this.transform.position + new Vector3(-this.transform.localScale.x * 1.5f, 1.5f, 0);
+            throwTipsObj?.SetActive(true);
+        }
+        else
+        {
+            throwTipsObj?.SetActive(false);
+        }
+
     }
 
     protected virtual void FixedUpdate()
@@ -629,6 +653,52 @@ public class PlayerController : MonoBehaviour
             EventCenter.Instance.TriggerEvent("TriggerDialogue",null);
         }
     }
+    //拾取并投掷炸弹
+    private void playerPickBomb(InputAction.CallbackContext context)
+    {
+        if(this.canThrow) 
+            return;
+        if(this.canPick)
+        {
+            canPick = false;
+            if(boss2BombObj!=null)
+            {
+                boss2BombObj.GetComponent<Boss2Bomb>().hasPick = true;
+                canThrow = true;
+                boss2BombObj.transform.position = this.transform.position + new Vector3(-this.transform.localScale.x*1.5f,1.5f,0);
+                boss2BombObj.transform.localRotation = Quaternion.identity;
+            }
+        }
+    }
+    private void playerThrowDir(InputAction.CallbackContext context)
+    {
+        this.hasThrowDir = true;
+        Vector2 value=context.ReadValue<Vector2>();
+        this.throwDir = new Vector3(value.x, value.y, 0);
+    }
+    private void playerThrowCancel(InputAction.CallbackContext context)
+    {
+        this.hasThrowDir = false;
+        this.throwDir = Vector3.zero;
+    }
+    private void playerThrowBomb(InputAction.CallbackContext context)
+    {
+        if(this.canThrow&&boss2BombObj!=null)
+        {
+            this.canThrow = false;
+            Boss2Platform.hasBomb = false;
+            boss2BombObj.GetComponent<Boss2Bomb>().isFly = true;
+            if (this.hasThrowDir)
+            {
+                boss2BombObj.GetComponent<Boss2Bomb>().moveDir = this.throwDir;
+            }
+            else
+            {
+                boss2BombObj.GetComponent<Boss2Bomb>().moveDir=new Vector3(this.transform.localScale.x,0,0);
+            }
+        }
+        
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("ChangeScene"))
@@ -637,12 +707,27 @@ public class PlayerController : MonoBehaviour
             targetScene = other.gameObject.name;
             playerTargetPos = other.GetComponent<ChangeScene>().nextScenePos;
         }
+        if (other.CompareTag("Boss2Bomb"))
+        {
+            if (this.canThrow)
+                return;
+            this.canPick = true;
+            this.boss2BombObj = other.gameObject;
+            other.GetComponent<Boss2Bomb>().inPickRange = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("ChangeScene"))
         {
             canChangeScene = false;
+        }
+        if (other.CompareTag("Boss2Bomb"))
+        {
+            this.canPick = false;
+            if(!this.canThrow)
+                this.boss2BombObj = null;
+            other.GetComponent<Boss2Bomb>().inPickRange = false;
         }
     }
     //返回检查点

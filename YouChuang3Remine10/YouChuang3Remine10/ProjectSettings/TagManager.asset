@@ -14,6 +14,8 @@ TagManager:
   - Enemy
   - Boss
   - Pendulum
+  - Boss2Bomb
+  - STRocket
   layers:
   - Default
   - TransparentFX
@@ -29,7 +31,7 @@ TagManager:
   - Boss
   - StopTime
   - Tips
-  - 
+  - Boss2Bomb
   - 
   - 
   - 

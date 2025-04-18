@@ -10,6 +10,7 @@ public class PlaneWarningMovement : MonoBehaviour
     public float distance = 2f;    // 每次移动距离（b单位）
     public float moveDir = 1;
     private Coroutine coroutine;
+    public float warnningY;
     void Start()
     {
         
@@ -18,11 +19,11 @@ public class PlaneWarningMovement : MonoBehaviour
     {
         if(moveDir>0)
         {
-            this.transform.position = new Vector3(-40, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(-40, warnningY, this.transform.position.z);
         }       
         else
         {
-            this.transform.position = new Vector3(40, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(40, warnningY, this.transform.position.z);
         }
         this.coroutine=StartCoroutine(MoveObjectRoutine());
     }

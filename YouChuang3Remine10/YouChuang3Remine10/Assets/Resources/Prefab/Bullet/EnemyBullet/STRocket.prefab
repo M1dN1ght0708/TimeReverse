@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 455880859106299538}
   m_Layer: 0
   m_Name: STRocket
-  m_TagString: Untagged
+  m_TagString: STRocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,8 +134,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0645654, y: 0.49987197, z: 0.4087715}
-  m_Center: {x: -0.13011491, y: -0.043340623, z: 0.022790909}
+  m_Size: {x: 1.0645654, y: 0.49987197, z: 4.4025345}
+  m_Center: {x: -0.13011491, y: -0.043340623, z: 0.06842041}
 --- !u!114 &455880859106299538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   attackForce: 0
+  attackType: 1
   stopTimeRange: {fileID: 0}
   isInRange: 0
   landSpeed: 20

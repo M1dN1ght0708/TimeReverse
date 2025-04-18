@@ -764,6 +764,7 @@ GameObject:
   - component: {fileID: 7077859157129078125}
   - component: {fileID: 8451986540341199875}
   - component: {fileID: 9182898106132409262}
+  - component: {fileID: 5433480053530147165}
   m_Layer: 11
   m_Name: Boss2
   m_TagString: Boss
@@ -795,7 +796,7 @@ Transform:
   - {fileID: 8855833918884895859}
   - {fileID: 8353978267237683173}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7077859157129078125
 Rigidbody:
@@ -878,7 +879,8 @@ MonoBehaviour:
   playerTrans: {fileID: 0}
   aimEffect: {fileID: 0}
   explosionEffect: {fileID: 0}
-  aimDelayTime: 0.3
+  aimMoveSpeed: 15
+  aimDelayTime: 0.05
   isAim: 0
   skill1AimTime: 2
   nowAimTime1: 0
@@ -903,11 +905,23 @@ MonoBehaviour:
   skill4WarnEffect: {fileID: 0}
   skill4TargetL: {fileID: 0}
   skill4TargetR: {fileID: 0}
-  skill4DashSpeed: 20
+  skill4DashSpeed: 40
   skill4MoveSpeed: 15
   skill4DashDistance: 60
   skill4WarnTime: 4
   shadowDelta: 0.1
+--- !u!114 &5433480053530147165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8641408817826618484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a593293ca9c817b4d93ac8e8c97a0369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8696924133418169139
 GameObject:
   m_ObjectHideFlags: 0

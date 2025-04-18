@@ -8,4 +8,5 @@ public class Attack : MonoBehaviour
     [Header("¹¥»÷Ïà¹Ø")]
     public int damage;
     public int attackForce;
+    public bool attackType;
 }
