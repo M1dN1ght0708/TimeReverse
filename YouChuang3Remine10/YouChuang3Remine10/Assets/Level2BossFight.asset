@@ -21,13 +21,13 @@ MonoBehaviour:
     value: 12
   aperture:
     overrideState: 1
-    value: 9
+    value: 8
   focalLength:
     overrideState: 1
-    value: 133
+    value: 130
   kernelSize:
     overrideState: 1
-    value: 1
+    value: 2
 --- !u!114 &-2205338874370170566
 MonoBehaviour:
   m_ObjectHideFlags: 3

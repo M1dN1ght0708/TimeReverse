@@ -387,6 +387,10 @@ MonoBehaviour:
   playerTargetPos: {x: 0, y: 0, z: 0}
   lastCheckPoint: {fileID: 0}
   isReturnCheckPoint: 0
+  canPick: 0
+  canThrow: 0
+  boss2BombObj: {fileID: 0}
+  throwTipsObj: {fileID: 0}
   isDead: 0
   isHurt: 0
   hurtForce: 0
