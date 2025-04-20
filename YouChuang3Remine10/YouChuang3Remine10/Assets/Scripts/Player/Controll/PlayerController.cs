@@ -226,11 +226,13 @@ public class PlayerController : MonoBehaviour
         if(canThrow&&boss2BombObj!=null)
         {
             boss2BombObj.transform.position = this.transform.position + new Vector3(-this.transform.localScale.x * 1.5f, 1.5f, 0);
-            throwTipsObj?.SetActive(true);
+            if(throwTipsObj!=null)
+                throwTipsObj?.SetActive(true);
         }
         else
         {
-            throwTipsObj?.SetActive(false);
+            if(throwTipsObj != null)
+                throwTipsObj?.SetActive(false);
         }
 
     }
