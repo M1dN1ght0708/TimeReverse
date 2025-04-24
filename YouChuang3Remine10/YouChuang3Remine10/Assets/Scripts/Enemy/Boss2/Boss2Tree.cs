@@ -74,10 +74,24 @@ public class Boss2Tree : BehaviorTree.Tree
     public float skill4WarnTime;
     private Coroutine dashShadowCoro;
     public float shadowDelta;
+    [Header("×ª½×¶Î¼¼ÄÜ")]
+    public Transform stageSkillTarget;
+    public float stageSkillMoveSpeed;
+    public int rocketCount;
+    private int tempCount = 0;
+    public float warnDelta;
+    public float perWarnDelta;
+    public float rocketDelta;
+    public float warnDistance;
+    private Coroutine warnOneCoro;
+    private Coroutine warnTwoCoro;
+    private Coroutine rocketOneCoro;
+    private Coroutine rocketTwoCoro;
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>
         {
+            new StageSkillTask(this.transform),
             new Sequence(new List<Node>
             {
                 new SkillIdTask(this.transform),
@@ -214,5 +228,77 @@ public class Boss2Tree : BehaviorTree.Tree
     {
         hpFadeObj.SetActive(true);
         hpObj.SetActive(true);
+    }
+
+    public void ShowWarn()
+    {
+        warnOneCoro=StartCoroutine(TriggerWarnOne());
+        Invoke("ShowWarnTwo", this.warnDelta);
+    }
+    public void ShowWarnTwo()
+    {
+        warnTwoCoro=StartCoroutine(TriggerWarnTwo());
+    }
+    IEnumerator TriggerWarnOne()
+    {
+        int index =0;
+        print("Warn1");
+        while (index<this.rocketCount)
+        {
+            GameObject rocketObj = PoolManager.Instance.GetObj("Component/Enemy/Boss2RocketsWarn");
+            rocketObj.transform.position = new Vector3(-16+this.warnDistance*2*index, 11, -1.1f);
+            index++;
+            if(index>=this.rocketCount)
+                yield break;
+            yield return new WaitForSeconds(this.perWarnDelta);
+        }                
+    }
+
+    IEnumerator TriggerWarnTwo()
+    {
+        int index = 0;
+        print("Warn2");
+        while (index < this.rocketCount)
+        {
+            GameObject rocketObj = PoolManager.Instance.GetObj("Component/Enemy/Boss2RocketsWarn");
+            rocketObj.transform.position = new Vector3(-14 + this.warnDistance*2 * index, 11, -1.1f);
+            index++;
+            if (index >= this.rocketCount)
+            {
+                print("Warn2End");
+                GenerateRocketsOne();
+                Invoke("GenerateRocketsTwo", rocketDelta);
+                yield break;
+            }
+            yield return new WaitForSeconds(this.perWarnDelta);
+        }
+    }
+    private void GenerateRocketsOne()
+    {
+        int index = 0;
+        print("Generate1");
+        while(index < this.rocketCount)
+        {
+            GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
+            rocketObj.transform.position = new Vector3(-16 + this.warnDistance * 2 * index, 22, -1.2f);
+            rocketObj.GetComponent<STRocket>().landSpeed = this.skill2BulletSpeed;
+            index++;
+        }
+    }    
+    private void GenerateRocketsTwo()
+    {
+        int index = 0;
+        print("Generate2");
+        while (index < this.rocketCount)
+        {
+            GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
+            rocketObj.transform.position = new Vector3(-14 + this.warnDistance * 2 * index, 22, -1.2f);
+            rocketObj.GetComponent<STRocket>().landSpeed = this.skill2BulletSpeed;
+            index++;            
+        }
+        if (!Boss2Character.hasStageTwo)
+        {
+            Boss2Character.hasStageTwo = true;
+        }
     }
 }

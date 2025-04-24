@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
         //判断是否播放收枪动画
         playerCanEndShoot();
 
-        if(canThrow&&boss2BombObj!=null)
+        /*if(canThrow&&boss2BombObj!=null)
         {
             boss2BombObj.transform.position = this.transform.position + new Vector3(-this.transform.localScale.x * 1.5f, 1.5f, 0);
             if(throwTipsObj!=null)
@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
         {
             if(throwTipsObj != null)
                 throwTipsObj?.SetActive(false);
-        }
+        }*/
 
     }
 
@@ -667,8 +667,11 @@ public class PlayerController : MonoBehaviour
             {
                 boss2BombObj.GetComponent<Boss2Bomb>().hasPick = true;
                 canThrow = true;
-                boss2BombObj.transform.position = this.transform.position + new Vector3(-this.transform.localScale.x*1.5f,1.5f,0);
+                boss2BombObj.transform.position = this.transform.position + new Vector3(0,1.5f,0);
                 boss2BombObj.transform.localRotation = Quaternion.identity;
+                boss2BombObj.SetActive(false);
+                if (throwTipsObj != null)
+                    throwTipsObj?.SetActive(true);
             }
         }
     }
@@ -677,6 +680,8 @@ public class PlayerController : MonoBehaviour
         this.hasThrowDir = true;
         Vector2 value=context.ReadValue<Vector2>();
         this.throwDir = new Vector3(value.x, value.y, 0);
+        if (throwTipsObj != null)
+            throwTipsObj?.SetActive(false);
     }
     private void playerThrowCancel(InputAction.CallbackContext context)
     {
@@ -688,7 +693,9 @@ public class PlayerController : MonoBehaviour
         if(this.canThrow&&boss2BombObj!=null)
         {
             this.canThrow = false;
-            Boss2Platform.hasBomb = false;
+            Boss2PlatformCharacter.hasBomb = false;
+            boss2BombObj.transform.position= this.transform.position + new Vector3(0, 1.5f, 0);
+            boss2BombObj.SetActive(true);
             boss2BombObj.GetComponent<Boss2Bomb>().isFly = true;
             if (this.hasThrowDir)
             {

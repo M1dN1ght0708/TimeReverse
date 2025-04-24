@@ -6,7 +6,7 @@ public class Boss2Attack : Attack
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") || collision.CompareTag("CanAttackPlatform"))
         {
             collision.GetComponentInParent<Character>()?.TakeDamage(this);
         }

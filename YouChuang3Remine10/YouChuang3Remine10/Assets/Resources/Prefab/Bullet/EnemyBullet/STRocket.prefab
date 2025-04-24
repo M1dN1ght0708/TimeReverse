@@ -154,6 +154,7 @@ MonoBehaviour:
   stopTimeRange: {fileID: 0}
   isInRange: 0
   landSpeed: 20
+  existTime: 15
 --- !u!1001 &4982837035921760159
 PrefabInstance:
   m_ObjectHideFlags: 0

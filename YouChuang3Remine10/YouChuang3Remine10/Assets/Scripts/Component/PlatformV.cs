@@ -16,7 +16,7 @@ public class PlatformV : BaseGameLevel
     private PlayerController pController;
     public bool dontReturnPlayer;
 
-    void Update()
+    protected virtual void Update()
     {
         if (isCanMove)
         {
@@ -39,7 +39,7 @@ public class PlatformV : BaseGameLevel
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (!isInRange && !PlayerController.isStopTime && collision.gameObject.CompareTag("Player"))
         {

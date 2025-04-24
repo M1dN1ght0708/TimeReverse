@@ -20,8 +20,11 @@ public class Boss2Bomb : BaseGameLevel
     private bool hasLand;
     private Rigidbody rigidbody;
     private Collider collider;
-    private GameObject boomEffect;
+    private GameObject boomEffectBoss;
+    private GameObject boomEffectOthers;
     public GameObject tipsObj;
+    private float randomDir;
+    private bool mustVertical;
 
     private void Awake()
     {
@@ -31,15 +34,17 @@ public class Boss2Bomb : BaseGameLevel
     }
     private void OnEnable()
     {
-        hasPick = false;
+        mustVertical = false;
+        //hasPick = false;
         hasLand = false;
-        isFly = false;
-        rigidbody.isKinematic =false;
-        collider.isTrigger = false;
+        //isFly = false;
+        //rigidbody.isKinematic =false;
+        //collider.isTrigger = false;
         nowExistTime = hideTime;
         nowFlyTime = maxFlyTime;
         this.gameObject.layer = LayerMask.NameToLayer("Boss2Bomb");
         this.moveDir=Vector3.zero;
+         randomDir = UnityEngine.Random.Range(-8, 9);
         
     }
     protected override void OnTriggerStay(Collider other)
@@ -49,18 +54,28 @@ public class Boss2Bomb : BaseGameLevel
         base.OnTriggerEnter(other);
         if(other.CompareTag("Ground")||other.CompareTag("MovePlatform"))
         {
-            boomEffect=PoolManager.Instance.GetObj("Bullet/EnemyBullet/RocketBoom");
-            boomEffect.transform.position = this.transform.position;
+            print("扎到箱子或平台");
+            boomEffectOthers = PoolManager.Instance.GetObj("Bullet/EnemyBullet/RocketBoom");
+            boomEffectOthers.transform.position = this.transform.position;
             Invoke("PushEffect", 1f);
             PoolManager.Instance.PushObj("Bullet/EnemyBullet/Boss2Bomb", this.gameObject);
+            hasPick = false;
+            isFly = false;
+            rigidbody.isKinematic = false;
+            collider.isTrigger = false;
         }
-        if(other.CompareTag("Boss"))
+        if (other.CompareTag("Boss"))
         {
+            print("扎到Boss");
             other.GetComponent<Character>()?.TakeDamage(this,true);
-            boomEffect = PoolManager.Instance.GetObj("Bullet/EnemyBullet/RocketBoom");
-            boomEffect.transform.position = this.transform.position;
+            boomEffectBoss = PoolManager.Instance.GetObj("Bullet/EnemyBullet/PlaneExplosion");
+            boomEffectBoss.transform.position = this.transform.position;
             Invoke("PushEffect", 1f);
             PoolManager.Instance.PushObj("Bullet/EnemyBullet/Boss2Bomb", this.gameObject);
+            hasPick = false;
+            isFly = false;
+            rigidbody.isKinematic = false;
+            collider.isTrigger = false;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -82,12 +97,35 @@ public class Boss2Bomb : BaseGameLevel
     // Update is called once per frame
     void Update()
     {
+        if(!hasPick&&Boss2Character.isStageTwo&&!Boss2Character.hasStageTwo)
+        {
+            boomEffectOthers = PoolManager.Instance.GetObj("Bullet/EnemyBullet/RocketBoom");
+            boomEffectOthers.transform.position = this.transform.position;
+            Invoke("PushEffect", 1f);
+            PoolManager.Instance.PushObj("Bullet/EnemyBullet/Boss2Bomb", this.gameObject);
+            hasPick = false;
+            isFly = false;
+            rigidbody.isKinematic = false;
+            collider.isTrigger = false;
+        }
+        if(!hasLand&&!isInRange&&!isFly&&!hasPick)
+        {
+            if(mustVertical)
+                rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+            else
+                rigidbody.velocity = new Vector2(randomDir, rigidbody.velocity.y);
+        }
         if(hasLand&&!hasPick)
         {
             nowExistTime = Time.time;
             if(nowExistTime<=0)
             {
                 PoolManager.Instance.PushObj("Bullet/EnemyBullet/Boss2Bomb", this.gameObject);
+                Boss2PlatformCharacter.hasBomb = false;
+                hasPick = false;
+                isFly = false;
+                rigidbody.isKinematic = false;
+                collider.isTrigger = false;
             }
         }
         EndRangeTimeStop();
@@ -106,11 +144,14 @@ public class Boss2Bomb : BaseGameLevel
             {
                 isFly = false;
                 PoolManager.Instance.PushObj("Bullet/EnemyBullet/Boss2Bomb", this.gameObject);
-                boomEffect = PoolManager.Instance.GetObj("Bullet/EnemyBullet/RocketBoom");
-                boomEffect.transform.position = this.transform.position;
+                boomEffectOthers = PoolManager.Instance.GetObj("Bullet/EnemyBullet/RocketBoom");
+                boomEffectOthers.transform.position = this.transform.position;
                 Invoke("PushEffect", 1f);
+                hasPick = false;
+                rigidbody.isKinematic = false;
+                collider.isTrigger = false;
             }
-            this.transform.Translate(moveDir * currentSpeed * Time.deltaTime, Space.World                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               );
+            this.transform.Translate(moveDir * currentSpeed * Time.deltaTime, Space.World);
         }   
         if(hasLand&&!hasPick&&!isFly)
         {
@@ -124,13 +165,18 @@ public class Boss2Bomb : BaseGameLevel
     protected override void StopTimeDo()
     {
         currentSpeed = 0;
+        rigidbody.velocity = Vector3.zero;
+        mustVertical = true;
     }
 
     private void PushEffect()
     {
-        if (boomEffect != null)
+        if (boomEffectOthers != null)
         {
-            PoolManager.Instance.PushObj("Bullet/EnemyBullet/RocketBoom", boomEffect);
+            PoolManager.Instance.PushObj("Bullet/EnemyBullet/RocketBoom", boomEffectOthers);
         }
+        if(boomEffectBoss != null)
+            PoolManager.Instance.PushObj("Bullet/EnemyBullet/PlaneExplosion", boomEffectBoss);
+        
     }
 }
