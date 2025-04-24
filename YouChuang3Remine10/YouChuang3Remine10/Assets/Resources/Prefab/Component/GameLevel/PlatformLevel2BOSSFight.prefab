@@ -124,7 +124,7 @@ Transform:
   - {fileID: 4748284306594041849}
   - {fileID: 6416363146238273381}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7173353192667869600
 Rigidbody:
@@ -288,7 +288,7 @@ MonoBehaviour:
   stopTimeRange: {fileID: 0}
   isInRange: 0
   speed: 2
-  maxMoveDistance: 2
+  maxMoveDistance: 3
   nowMoveDistance: 0
   currentSpeed: 0
   direction: 1
@@ -301,9 +301,9 @@ MonoBehaviour:
   isStageTwo: 0
   hasStageTwo: 0
   upSpeed: 3
-  downSpeed: 5
-  startPos: {x: 0, y: 0, z: 0}
-  endPos: {x: 0, y: 0, z: 0}
+  downSpeed: 10
+  startPos: {x: 0, y: 14, z: 0}
+  endPos: {x: 0, y: -5, z: 0}
   isUp: 0
   isDown: 0
   hasDown: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   deadEvent:
     m_PersistentCalls:
       m_Calls: []
-  maxHp: 100
+  maxHp: 60
   currentHp: 0
   isCanInvincible: 0
   invincibleTime: 0
@@ -554,7 +554,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.32704395, g: 1, b: 0.9934896, a: 1}
-  m_Intensity: 10
+  m_Intensity: 5
   m_Range: 3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1647,7 +1647,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63479
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -1929,7 +1929,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63479
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -2070,7 +2070,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.32704395, g: 1, b: 0.9934896, a: 1}
-  m_Intensity: 10
+  m_Intensity: 5
   m_Range: 3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2164,7 +2164,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.32704395, g: 1, b: 0.9934896, a: 1}
-  m_Intensity: 10
+  m_Intensity: 5
   m_Range: 3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2903,7 +2903,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63479
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -2997,7 +2997,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63479
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -3091,7 +3091,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63479
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -3336,7 +3336,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.32704395, g: 1, b: 0.9934896, a: 1}
-  m_Intensity: 10
+  m_Intensity: 5
   m_Range: 3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3729,7 +3729,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63479
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -3917,7 +3917,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63479
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -4011,7 +4011,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63479
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
