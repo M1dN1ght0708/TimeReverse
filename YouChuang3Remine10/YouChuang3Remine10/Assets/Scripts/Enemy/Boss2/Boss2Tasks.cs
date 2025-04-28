@@ -38,6 +38,7 @@ namespace Boos2Tasks
             {
                 return NodeState.Failure;
             }
+            b2Tree.skillID = 0;
             if ((Mathf.Abs(b2Tree.stageSkillTarget.position.x - this.b2Trans.position.x) < 0.5f
                 && Mathf.Abs(b2Tree.stageSkillTarget.position.y - this.b2Trans.position.y) < 0.5f) ||
                 isAttack)
@@ -504,9 +505,12 @@ namespace Boos2Tasks
                     deltaTime = 0;
                     b2Tree.skill2NowCount--;
                     b2Tree.animator.Play("PlaneRocket");
+                    /*GameObject warnObj = PoolManager.Instance.GetObj("Component/Enemy/Boss2RocketsWarn");
+                    warnObj.transform.position = new Vector3(b2Trans.position.x, 11, -1.1f);
                     GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
                     rocketObj.transform.position = new Vector3(b2Trans.position.x, b2Trans.position.y - 3, -1.2f);
-                    rocketObj.GetComponent<STRocket>().landSpeed = b2Tree.skill2BulletSpeed;
+                    rocketObj.GetComponent<STRocket>().landSpeed = b2Tree.skill2BulletSpeed;*/
+                    b2Tree.GenerateRocketOnce(b2Trans.position.x, 11, b2Trans.position.x, b2Trans.position.y - 3);
                 }
                 else
                 {
@@ -630,9 +634,11 @@ namespace Boos2Tasks
                 {
 
                     deltaTime = 0;
-                    GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
-                    rocketObj.transform.position = new Vector3(this.b2Trans.transform.position.x, this.b2Trans.transform.position.y, -1.2f);
-                    rocketObj.GetComponent<STRocket>().landSpeed = b2Tree.skill2BulletSpeed;
+                    //GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
+                    //rocketObj.transform.position = new Vector3(this.b2Trans.transform.position.x, this.b2Trans.transform.position.y, -1.2f);
+                    //rocketObj.GetComponent<STRocket>().landSpeed = b2Tree.skill2BulletSpeed;
+                    b2Tree.GenerateRocketOnce(b2Trans.position.x, 11, b2Trans.position.x, b2Trans.position.y - 3);
+
                 }
                 else
                 {

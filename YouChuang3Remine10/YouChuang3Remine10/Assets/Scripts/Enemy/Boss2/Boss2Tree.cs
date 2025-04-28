@@ -32,6 +32,7 @@ public class Boss2Tree : BehaviorTree.Tree
     public Transform playerTrans;
     public GameObject aimEffect;
     public GameObject explosionEffect;
+    public float rocketDelayTime=1;
     [Header("技能一")]   
     public float aimMoveSpeed=1;
     private Vector3 skillOneTraceDir;
@@ -160,7 +161,7 @@ public class Boss2Tree : BehaviorTree.Tree
         return false;
 
     }
-
+    //瞄准特效
     public void StartAim()
     {
         aimEffect.transform.position = this.playerTrans.position + new Vector3(2, 3, 0);
@@ -181,6 +182,7 @@ public class Boss2Tree : BehaviorTree.Tree
         }
     }
 
+    //残影特效
     public void TriggerShadow()
     {
         this.dashShadowCoro = StartCoroutine(TriggerShadowCoro());
@@ -200,6 +202,7 @@ public class Boss2Tree : BehaviorTree.Tree
         }
     }
 
+    //受伤死亡
     public void GetHurt(Transform attackTrans, bool attackType = false)
     {
         if (attackType)
@@ -223,13 +226,29 @@ public class Boss2Tree : BehaviorTree.Tree
     {
         this.gameObject.Destroy();
     }
-
+    //UI显示
     private void ShowHpUI()
     {
         hpFadeObj.SetActive(true);
         hpObj.SetActive(true);
     }
+    //发射单个导弹
+    public void GenerateRocketOnce(float warnPosX, float warnPosY, float rocketPosX, float rocketPosY)
+    {
+        StartCoroutine(IEGenerateRocketOnce(warnPosX, warnPosY, rocketPosX,rocketPosY));
+    }
+    IEnumerator IEGenerateRocketOnce(float warnPosX,float warnPosY,float rocketPosX,float rocketPosY)
+    {
+        GameObject warnObj = PoolManager.Instance.GetObj("Component/Enemy/Boss2RocketsWarn");
+        warnObj.transform.position = new Vector3(warnPosX, 11, -1.1f);
+        yield return new WaitForSeconds(rocketDelayTime);
+        GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
+        rocketObj.transform.position = new Vector3(rocketPosX, rocketPosY, -1.2f);
+        rocketObj.GetComponent<STRocket>().landSpeed = this.skill2BulletSpeed;
+        yield break;
+    }
 
+    //转阶段技能特效
     public void ShowWarn()
     {
         warnOneCoro=StartCoroutine(TriggerWarnOne());
@@ -296,6 +315,10 @@ public class Boss2Tree : BehaviorTree.Tree
             rocketObj.GetComponent<STRocket>().landSpeed = this.skill2BulletSpeed;
             index++;            
         }
+        Invoke("OnConnectedToServer", 1f);
+    }
+    private void OnConnectedToServer()
+    {
         if (!Boss2Character.hasStageTwo)
         {
             Boss2Character.hasStageTwo = true;

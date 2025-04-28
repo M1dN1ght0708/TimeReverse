@@ -48,7 +48,7 @@ public class PlayerBullet : BaseGameLevel
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy")|| other.CompareTag("Boss"))
         {
             other.GetComponent<Character>()?.TakeDamage(this,true);
             PoolManager.Instance.PushObj("Bullet/PlayerBullet", this.gameObject);

@@ -680,8 +680,6 @@ public class PlayerController : MonoBehaviour
         this.hasThrowDir = true;
         Vector2 value=context.ReadValue<Vector2>();
         this.throwDir = new Vector3(value.x, value.y, 0);
-        if (throwTipsObj != null)
-            throwTipsObj?.SetActive(false);
     }
     private void playerThrowCancel(InputAction.CallbackContext context)
     {
@@ -706,7 +704,9 @@ public class PlayerController : MonoBehaviour
                 boss2BombObj.GetComponent<Boss2Bomb>().moveDir=new Vector3(this.transform.localScale.x,0,0);
             }
         }
-        
+        if (throwTipsObj != null)
+            throwTipsObj?.SetActive(false);
+
     }
     private void OnTriggerStay(Collider other)
     {

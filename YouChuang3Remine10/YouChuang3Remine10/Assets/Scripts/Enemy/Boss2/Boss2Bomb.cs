@@ -25,6 +25,7 @@ public class Boss2Bomb : BaseGameLevel
     public GameObject tipsObj;
     private float randomDir;
     private bool mustVertical;
+    private bool hasStageTwo;
 
     private void Awake()
     {
@@ -97,8 +98,9 @@ public class Boss2Bomb : BaseGameLevel
     // Update is called once per frame
     void Update()
     {
-        if(!hasPick&&Boss2Character.isStageTwo&&!Boss2Character.hasStageTwo)
+        if(!hasPick&&Boss2Character.isStageTwo&&!this.hasStageTwo)
         {
+            this.hasStageTwo = true;
             boomEffectOthers = PoolManager.Instance.GetObj("Bullet/EnemyBullet/RocketBoom");
             boomEffectOthers.transform.position = this.transform.position;
             Invoke("PushEffect", 1f);
@@ -107,6 +109,7 @@ public class Boss2Bomb : BaseGameLevel
             isFly = false;
             rigidbody.isKinematic = false;
             collider.isTrigger = false;
+            Boss2PlatformCharacter.hasBomb = false;
         }
         if(!hasLand&&!isInRange&&!isFly&&!hasPick)
         {
@@ -117,7 +120,7 @@ public class Boss2Bomb : BaseGameLevel
         }
         if(hasLand&&!hasPick)
         {
-            nowExistTime = Time.time;
+            nowExistTime -=Time.deltaTime;
             if(nowExistTime<=0)
             {
                 PoolManager.Instance.PushObj("Bullet/EnemyBullet/Boss2Bomb", this.gameObject);
@@ -126,6 +129,7 @@ public class Boss2Bomb : BaseGameLevel
                 isFly = false;
                 rigidbody.isKinematic = false;
                 collider.isTrigger = false;
+                Boss2PlatformCharacter.hasBomb = false;
             }
         }
         EndRangeTimeStop();

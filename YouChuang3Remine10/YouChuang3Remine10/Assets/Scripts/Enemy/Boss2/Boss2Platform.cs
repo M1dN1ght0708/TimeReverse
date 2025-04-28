@@ -11,6 +11,7 @@ public class Boss2Platform : PlatformV
     private Boss2PlatformCharacter character;
     public GameObject goodPlatform;
     public GameObject brokenPlatform;
+    public GameObject lightObjs;
     public bool isStageTwo;
     public bool hasStageTwo;
     public float upSpeed;
@@ -114,6 +115,7 @@ public class Boss2Platform : PlatformV
     {
         if(isUp)
         {
+            lightObjs.SetActive(true);
             hasDown = false;
             this.transform.Translate(this.transform.up * verticalSpeed * Time.deltaTime, Space.World);
             if(!inTrigger&&this.transform.position.y>-0.7f)
@@ -139,9 +141,10 @@ public class Boss2Platform : PlatformV
     {
         if (isDown&&!hasDown)
         {
+            lightObjs.SetActive(false);
             this.collider.isTrigger = true;
             this.transform.Translate(-this.transform.up * verticalSpeed * Time.deltaTime, Space.World);
-            if (Mathf.Abs(endPos.y - this.transform.position.y) <0.5f)
+            if (Mathf.Abs(endPos.y - this.transform.position.y) <0.1f)
             {
                 print(endPos.y - this.transform.position.y);
                 isDown = false;

@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss2PlatformCharacter : Character
 {
+    public bool testHasBomb;
+    public bool testHasStage;
+    public bool testB2IsStage;
+    public int attackCount;
     public float probability;
     public float generateCD;
     public float nowCD;
@@ -16,6 +21,7 @@ public class Boss2PlatformCharacter : Character
     //[HideInInspector]
     public static bool hasBomb;
     private bool hasStageTwo;
+    private Boss2Platform b2Platform;
     /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Attack>() != null)
@@ -34,14 +40,25 @@ public class Boss2PlatformCharacter : Character
     {
         this.currentHp = this.maxHp;
     }
-
+    private void Awake()
+    {
+        this.testHasBomb = hasBomb;
+        b2Platform=this.GetComponent<Boss2Platform>();
+    }
     protected override void Update()
     {
+        this.testHasBomb = hasBomb;
+        this.testHasStage = hasStageTwo;
+        this.testB2IsStage = Boss2Character.isStageTwo;
         base.Update();
-        if (Boss2Character.isStageTwo && !this.hasStageTwo)
+        if (!this.hasStageTwo && Boss2Character.isStageTwo)
         {
-            this.GetDamage(maxHp, true);           
+            this.b2Platform.isUp = false;           
+            //this.b2Platform.isDown = true;
+            this.GetDamage(maxHp, true);
+            nowCD = generateCD;
             this.hasStageTwo = true;
+            
         }
             
         if (isCD)
@@ -63,6 +80,13 @@ public class Boss2PlatformCharacter : Character
     }
     private void GetDamage(float damage, bool attackType = false)
     {
+
+        bool canHurt = !this.hasStageTwo! && this.hasStageTwo && Boss2Character.isStageTwo;
+        if (this.b2Platform.isUp || this.b2Platform.isDown||this.b2Platform.hasDown)
+        {
+            print(this.gameObject.name+"return");
+            return;
+        }
         this.currentHp -= damage;
         if (attackType)
         {

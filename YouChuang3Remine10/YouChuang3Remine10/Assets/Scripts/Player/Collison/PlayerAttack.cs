@@ -7,7 +7,7 @@ public class PlayerAttack : Attack
     public float timeGet;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Enemy")||collision.CompareTag("Boss")||collision.CompareTag("CanAttackPlatform"))
+        if(collision.CompareTag("Enemy")||collision.CompareTag("Boss")/*||collision.CompareTag("CanAttackPlatform")*/)
         {
             Debug.Log("gongji");
             collision.GetComponentInParent<Character>()?.TakeDamage(this);
