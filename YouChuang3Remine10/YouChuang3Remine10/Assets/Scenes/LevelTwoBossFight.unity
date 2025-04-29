@@ -2209,6 +2209,10 @@ PrefabInstance:
       value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 4055869308101653420, guid: dce4e1cb09ff298499fabe1c93734cdc, type: 3}
+      propertyPath: direction
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055869308101653420, guid: dce4e1cb09ff298499fabe1c93734cdc, type: 3}
       propertyPath: startPos.y
       value: 11
       objectReference: {fileID: 0}
@@ -11945,6 +11949,10 @@ PrefabInstance:
       propertyPath: skill2Target
       value: 
       objectReference: {fileID: 1992302334}
+    - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
+      propertyPath: warnDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9182898106132409262, guid: a789264dadca97a40b8ec372b81b11de, type: 3}
       propertyPath: skill3TargetL
       value: 
