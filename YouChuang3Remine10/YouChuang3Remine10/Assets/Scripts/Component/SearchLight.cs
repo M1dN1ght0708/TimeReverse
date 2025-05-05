@@ -6,8 +6,10 @@ public class SearchLight : BaseGameLevel
 {
     public GameObject warnningEffect;
 
-    public Material matRed;
-    public Material matBlue;
+    public GameObject blueLight;
+    public GameObject redLight;
+    //public Material matRed;
+    //public Material matBlue;
     private MeshRenderer meshR;
 
     public string cageName;
@@ -38,8 +40,26 @@ public class SearchLight : BaseGameLevel
             {
                 isFindPlayer = false;
                 nowExitTime = this.exitTime;
+                blueLight.SetActive(true);
+                redLight.SetActive(false);
+                EventCenter.Instance.TriggerEvent(this.spyCameraName, false);
             }
 
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            print("∑¢œ÷ÕÊº“");
+            isFindPlayer = true;
+            nowExitTime = this.exitTime;
+            //meshR.material=matRed;
+            blueLight.SetActive(false);
+            redLight.SetActive(true);
+            EventCenter.Instance.TriggerEvent(this.cageName, null);
+            EventCenter.Instance.TriggerEvent(this.spyCameraName, true);
+            this.Warnning();
         }
     }
     protected override void OnTriggerEnter(Collider other)
@@ -48,7 +68,9 @@ public class SearchLight : BaseGameLevel
         if (other.gameObject.CompareTag("Player"))
         {
             isFindPlayer = true;
-            meshR.material=matRed;
+            //meshR.material=matRed;
+            blueLight.SetActive(false);
+            redLight.SetActive(true);
             EventCenter.Instance.TriggerEvent(this.cageName,null);
             EventCenter.Instance.TriggerEvent(this.spyCameraName, true);
             this.Warnning();

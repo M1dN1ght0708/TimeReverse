@@ -34,9 +34,9 @@ public class SpyCamera : BaseGameLevel
     private void SwitchRedOrBule(object isRed)
     {
         this.redCamera.SetActive((bool)isRed);
-        this.blueCamera.SetActive((bool)isRed);
+        this.blueCamera.SetActive(!(bool)isRed);
         this.redBase.SetActive((bool)isRed);
-        this.blueBase.SetActive((bool)isRed);
+        this.blueBase.SetActive(!(bool)isRed);
 
     }
 
