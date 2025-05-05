@@ -1,21 +1,20 @@
 using UnityEngine;
-using System.Collections;
 
 public class ProbeController : MonoBehaviour
 {
-
+    public float y = 0;
     ReflectionProbe probe;
 
     void Start()
     {
-        this.probe = GetComponent<ReflectionProbe>();
+        probe = GetComponent<ReflectionProbe>();
     }
 
     void Update()
     {
-        this.probe.transform.position = new Vector3(
+        probe.transform.position = new Vector3(
             Camera.main.transform.position.x,
-            (float)0,
+            y,
             Camera.main.transform.position.z
         );
 
