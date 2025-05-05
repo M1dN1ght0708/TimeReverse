@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlatformV : BaseGameLevel
 {
+    public bool isCanAttack;
     public float speed;
     public float maxMoveDistance;
     public float nowMoveDistance;
@@ -41,10 +42,11 @@ public class PlatformV : BaseGameLevel
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (!isInRange && !PlayerController.isStopTime && collision.gameObject.CompareTag("Player"))
+
+        if (!isInRange && !PlayerController.isStopTime && collision.gameObject.CompareTag("Player")&&this.isCanAttack)
         {
             pController=collision.gameObject.GetComponent<PlayerController>();          
-            if (pController.phyCheck.isGround&&direction == -1&&this.transform.position.y> collision.gameObject.transform.position.y)
+            if (pController.phyCheck.isGround&&direction == -1&&this.transform.position.y> collision.gameObject.transform.position.y+2.2f)
             {
                 collision.gameObject.GetComponent<Character>().TakeDamage(this);
                 if(!dontReturnPlayer)

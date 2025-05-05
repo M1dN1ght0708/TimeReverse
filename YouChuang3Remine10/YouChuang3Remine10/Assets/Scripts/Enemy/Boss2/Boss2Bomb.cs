@@ -53,7 +53,7 @@ public class Boss2Bomb : BaseGameLevel
         if (!hasPick||!isFly)
             return;
         base.OnTriggerEnter(other);
-        if(other.CompareTag("Ground")||other.CompareTag("MovePlatform"))
+        if(other.CompareTag("Ground")/*||other.CompareTag("MovePlatform")*/)
         {
             print("扎到箱子或平台");
             boomEffectOthers = PoolManager.Instance.GetObj("Bullet/EnemyBullet/RocketBoom");
@@ -118,7 +118,7 @@ public class Boss2Bomb : BaseGameLevel
             else
                 rigidbody.velocity = new Vector2(randomDir, rigidbody.velocity.y);
         }
-        if(hasLand&&!hasPick)
+        if(hasLand||!hasPick)
         {
             nowExistTime -=Time.deltaTime;
             if(nowExistTime<=0)

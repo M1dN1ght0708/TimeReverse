@@ -280,7 +280,7 @@ public class Boss2Tree : BehaviorTree.Tree
         while (index < this.rocketCount)
         {
             GameObject rocketObj = PoolManager.Instance.GetObj("Component/Enemy/Boss2RocketsWarn");
-            rocketObj.transform.position = new Vector3(-14 + this.warnDistance*2 * index, 11, -1.1f);
+            rocketObj.transform.position = new Vector3(-16+ this.warnDistance + this.warnDistance*2 * index, 11, -1.1f);
             index++;
             if (index >= this.rocketCount)
             {
@@ -311,7 +311,7 @@ public class Boss2Tree : BehaviorTree.Tree
         while (index < this.rocketCount)
         {
             GameObject rocketObj = PoolManager.Instance.GetObj("Bullet/EnemyBullet/STRocket");
-            rocketObj.transform.position = new Vector3(-14 + this.warnDistance * 2 * index, 22, -1.2f);
+            rocketObj.transform.position = new Vector3(-16 + this.warnDistance + this.warnDistance * 2 * index, 22, -1.2f);
             rocketObj.GetComponent<STRocket>().landSpeed = this.skill2BulletSpeed;
             index++;            
         }

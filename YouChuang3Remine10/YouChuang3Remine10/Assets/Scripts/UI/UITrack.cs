@@ -17,7 +17,8 @@ public class UITrack : MonoBehaviour
     {
         foreach (GameObject ui in uiObjs)
         {
-            ui.transform.position = Camera.main.WorldToScreenPoint(targetTrans.position + offset);
+            if(targetTrans != null)
+                ui.transform.position = Camera.main.WorldToScreenPoint(targetTrans.position + offset);
         }
 
     }

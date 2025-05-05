@@ -7,11 +7,12 @@ public class PlayerAttack : Attack
     public float timeGet;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Enemy")||collision.CompareTag("Boss")/*||collision.CompareTag("CanAttackPlatform")*/)
+        if(collision.CompareTag("Enemy")||collision.CompareTag("Boss"))
         {
             Debug.Log("gongji");
             collision.GetComponentInParent<Character>()?.TakeDamage(this);
-            if(this.GetComponentInParent<PlayerController>().stopTimeCounter< this.GetComponentInParent<PlayerController>().stopTimeNeed)
+            if(this.GetComponentInParent<PlayerController>().stopTimeCounter< 
+                this.GetComponentInParent<PlayerController>().stopTimeNeed)
                 this.GetComponentInParent<PlayerController>().stopTimeCounter += timeGet;
         }
             
