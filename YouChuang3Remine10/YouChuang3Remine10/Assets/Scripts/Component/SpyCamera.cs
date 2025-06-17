@@ -12,7 +12,7 @@ public class SpyCamera : BaseGameLevel
     public GameObject blueBase;
 
     public float exitTime;
-    public string cageName;
+    //public string cageName;
     private float nowExitTime;
     private bool isFindPlayer;
 
@@ -23,6 +23,8 @@ public class SpyCamera : BaseGameLevel
     public Transform target;
     public int rotateDirection;
     public float rotateCounter = 0;
+
+    public bool beStop;
 
     void Start()
     {
@@ -49,5 +51,25 @@ public class SpyCamera : BaseGameLevel
         {
             rotateDirection *= -1;
         }
+        EndRangeTimeStop();
+        if ((isInRange && PlayerController.isRangeStopTime) || PlayerController.isStopTime)
+        {
+            StopTimeDo();
+        }
+        else
+        {
+            beStop = false;
+            currentSpeed = this.speed;
+        }
+    }
+    protected override void StopTimeDo()
+    {
+        base.StopTimeDo();
+        beStop = true;
+        currentSpeed = 0;
+    }
+    protected override void EndRangeTimeStop()
+    {
+        base.EndRangeTimeStop();
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class SearchLight : BaseGameLevel
 {
     public GameObject warnningEffect;
+    private SpyCamera spyCamera;
 
     public GameObject blueLight;
     public GameObject redLight;
@@ -19,10 +20,14 @@ public class SearchLight : BaseGameLevel
     private float nowExitTime;
     private bool isFindPlayer;
 
+    public float produceCD;
+    public float nowCD;
+
 
     private void Awake()
     {
         this.meshR=this.GetComponent<MeshRenderer>();
+        this.spyCamera=this.GetComponentInParent<SpyCamera>();
     }
     void Start()
     {
@@ -35,9 +40,11 @@ public class SearchLight : BaseGameLevel
         //发现玩家
         if (isFindPlayer)
         {
+            nowCD-=Time.deltaTime;
             nowExitTime -= Time.deltaTime;
             if(nowExitTime <= 0)
             {
+                nowCD = 0;
                 isFindPlayer = false;
                 nowExitTime = this.exitTime;
                 blueLight.SetActive(true);
@@ -49,7 +56,7 @@ public class SearchLight : BaseGameLevel
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")&&!spyCamera.beStop)
         {
             print("发现玩家");
             isFindPlayer = true;
@@ -57,8 +64,13 @@ public class SearchLight : BaseGameLevel
             //meshR.material=matRed;
             blueLight.SetActive(false);
             redLight.SetActive(true);
-            EventCenter.Instance.TriggerEvent(this.cageName, null);
-            EventCenter.Instance.TriggerEvent(this.spyCameraName, true);
+            if(nowCD<=0) 
+            {
+                nowCD = produceCD;
+                EventCenter.Instance.TriggerEvent(this.cageName, null);
+                EventCenter.Instance.TriggerEvent(this.spyCameraName, true);
+            }
+           
             this.Warnning();
         }
     }

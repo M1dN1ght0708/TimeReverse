@@ -184,9 +184,9 @@ public class DroneChase : BaseState
         {
             canMove = false;
             drone.SwitchState(DroneStateEnum.Attack);
-            //drone.animator.Play("StopmoveDrone");
+            //spyDrone.animator.Play("StopmoveDrone");
             //if (info.IsName("StopmoveDrone") && info.normalizedTime >= 0.95f) { }
-            //    drone.SwitchState(DroneStateEnum.Attack);
+            //    spyDrone.SwitchState(DroneStateEnum.Attack);
             //return;
 
         }

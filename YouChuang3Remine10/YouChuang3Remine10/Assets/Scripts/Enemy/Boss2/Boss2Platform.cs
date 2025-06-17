@@ -146,7 +146,7 @@ public class Boss2Platform : PlatformV
             this.transform.Translate(-this.transform.up * verticalSpeed * Time.deltaTime, Space.World);
             if (Mathf.Abs(endPos.y - this.transform.position.y) <0.1f)
             {
-                print(endPos.y - this.transform.position.y);
+                //print(endPos.y - this.transform.position.y);
                 isDown = false;
                 hasDown = true;
             }

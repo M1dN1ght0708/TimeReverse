@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MySceneManager : MonoBehaviour
 {
+    public bool isLoading;
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration;
     private bool isFade;
@@ -29,6 +30,13 @@ public class MySceneManager : MonoBehaviour
 
     public void ChangeSceneTo(string sceneTo,Vector3 targetPos=default(Vector3),bool disInput=true)
     {
+        if(!isLoading)
+        {
+            isLoading = true;
+            Boss2Character.isStageTwo = false;
+            Boss2Character.hasStageTwo = false;           
+        }
+            
         if (!isLoadScene)
         {
             isLoadScene = true;
@@ -38,6 +46,7 @@ public class MySceneManager : MonoBehaviour
     }
     private IEnumerator LoadScene(string sceneTo, Vector3 targetPos = default(Vector3), bool disInput = true)
     {
+       
         GameObject nowPlayerObj = GameObject.Find("Player");
         if (nowPlayerObj != null)
         {
@@ -60,6 +69,9 @@ public class MySceneManager : MonoBehaviour
         if(playerObj!=null&&disInput)
             playerObj.GetComponent<PlayerController>().playerInput.Enable();
         isLoadScene = false;
+        PoolManager.Instance.Clear();
+        isLoading = false;
+
     }
 
     //ºÚ³¡µ­ÈëTimeLine

@@ -4,9 +4,11 @@ using UnityEngine;
 using BehaviorTree;
 using Boos2Tasks;
 using Aura2API;
+using Unity.VisualScripting;
 
 public class Boss2Tree : BehaviorTree.Tree
 {
+    public bool playerDead;
     public Dictionary<string, object> blackBoard = new Dictionary<string, object>();
     [Header("UI相关")]
     public GameObject hpFadeObj;
@@ -88,12 +90,19 @@ public class Boss2Tree : BehaviorTree.Tree
     private Coroutine warnTwoCoro;
     private Coroutine rocketOneCoro;
     private Coroutine rocketTwoCoro;
+    [Header("转阶段无人机")]
+    public float droneCD;
+    private float nowDroneCD;
+    public bool hasDrone;
+    public Vector3 spawnPoint;
+    public float spawnX;
+    public float spawnY;
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>
         {
             new StageSkillTask(this.transform),
-            new Sequence(new List<Node>
+            new BehaviorTree.Sequence(new List<Node>
             {
                 new SkillIdTask(this.transform),
                 new Selector(new List<Node>
@@ -109,6 +118,13 @@ public class Boss2Tree : BehaviorTree.Tree
         });
         return root;
     }
+
+    private void Awake()
+    {
+        EventCenter.Instance.AddEventListener("Boss2StageAim", Boss2StageAim);
+    }
+
+
     protected override void Start()
     {
         base.Start();
@@ -122,7 +138,17 @@ public class Boss2Tree : BehaviorTree.Tree
     protected override void Update()
     {
         base.Update();
-       
+       if(Boss2Character.hasStageTwo)
+        {
+            nowDroneCD -= Time.deltaTime;
+            if(nowDroneCD <=0) 
+            {
+                this.CallSpyDrone();
+            }
+        }
+        print("is: "+Boss2Character.isStageTwo);
+        print("has: " + Boss2Character.hasStageTwo);
+
     }
 
     public void HideExplosion()
@@ -180,6 +206,54 @@ public class Boss2Tree : BehaviorTree.Tree
             aimEffect.transform.Translate(skillOneTraceDir * aimMoveSpeed * Time.deltaTime, Space.Self);
             yield return new WaitForSeconds(this.aimDelayTime);           
         }
+    }
+    //阶段二定时召唤无人机
+    private void CallSpyDrone()
+    {
+        if(!hasDrone)
+        {
+            for(int i=0; i<2; i++)
+            {
+                float posX=Random.Range(-spawnX, spawnX+1);
+                float posY=Random.Range(-spawnY, spawnY+1);
+                GameObject spyDrone = PoolManager.Instance.GetObj("Component/Enemy/SpyDrone");
+                spyDrone.transform.position=new Vector3(posX+spawnPoint.x, posY+spawnPoint.y, 0);
+            }       
+            hasDrone = true;
+            nowDroneCD = droneCD;
+        }
+    }
+
+    //阶段二额外瞄准
+    private void Boss2StageAim(object info)
+    {
+        GameObject aimObj=PoolManager.Instance.GetObj("Effect/PlaneTarget");
+        float startX = Random.Range(-2, 3);
+        float startY=Random.Range(-3, 4);
+        aimObj.transform.position = this.playerTrans.position + new Vector3(startX, startY, 0);
+        float nowTime = Time.time;
+        StartCoroutine(StageAimCoroutine(nowTime,aimObj));
+    }
+    IEnumerator StageAimCoroutine(float nowTime,GameObject aimObj)
+    {
+        while (Time.time - nowTime < this.skill1AimTime)
+        {
+            skillOneTraceDir = this.playerTrans.position + new Vector3(0, 2, 0) - aimObj.transform.position;
+            //aimEffect.transform.position = this.playerTrans.position + new Vector3(0, 2, 0);
+            aimObj.transform.Translate(skillOneTraceDir * aimMoveSpeed * Time.deltaTime, Space.Self);
+            yield return new WaitForSeconds(this.aimDelayTime);
+        }
+        //float boomTime= Time.time;
+        //while (Time.time - boomTime < this.skill1ExplosionTime) { }
+        yield return new WaitForSeconds(this.skill1ExplosionTime);
+        Vector3 boomPos=aimObj.transform.position;
+        PoolManager.Instance.PushObj("Effect/PlaneTarget", aimObj);
+        GameObject boomObj=PoolManager.Instance.GetObj("Effect/PlaneExplosion");
+        boomObj.transform.position=boomPos;
+        yield return new WaitForSeconds(2f);
+        PoolManager.Instance.PushObj("Effect/PlaneExplosion", boomObj);
+        yield break;
+
     }
 
     //残影特效

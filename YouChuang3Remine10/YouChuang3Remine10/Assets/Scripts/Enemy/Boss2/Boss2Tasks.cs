@@ -34,7 +34,7 @@ namespace Boos2Tasks
         }
         public override NodeState Evaluate()
         {
-            if(Boss2Character.hasStageTwo||b2Character.currentHp>b2Character.maxHp/2||b2Tree.skillID!=0)
+            if(Boss2Character.hasStageTwo||b2Character.currentHp>b2Character.maxHp/2||b2Tree.skillID!=0||MySceneManager.Instance.isLoading)
             {
                 return NodeState.Failure;
             }

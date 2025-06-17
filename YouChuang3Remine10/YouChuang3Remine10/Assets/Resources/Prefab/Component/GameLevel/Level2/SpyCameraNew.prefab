@@ -58,13 +58,13 @@ MonoBehaviour:
   redBase: {fileID: 2643249552835742621}
   blueBase: {fileID: 6064101901477756287}
   exitTime: 0
-  cageName: Cage1
   speed: 10
   maxRotation: 10
   currentSpeed: 0
   target: {fileID: 4181602891250852890}
   rotateDirection: 1
   rotateCounter: 0
+  beStop: 0
 --- !u!1 &973425311854241991
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ Transform:
   - {fileID: 2400993937712635923}
   - {fileID: 4181602891250852890}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2643249552835742621
 GameObject:
@@ -578,6 +578,8 @@ MonoBehaviour:
   cageName: Cage1
   spyCameraName: SpyL1-3
   exitTime: 8
+  produceCD: 0
+  nowCD: 0
 --- !u!60 &8260301432845469460
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1002,3 +1004,5 @@ MonoBehaviour:
   cageName: Cage1
   spyCameraName: SpyL1-3
   exitTime: 0
+  produceCD: 0
+  nowCD: 0

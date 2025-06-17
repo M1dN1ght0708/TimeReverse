@@ -71,7 +71,7 @@ public class Boss2PlatformCharacter : Character
                 isBroken = false;
             }
         }
-        print(hasBomb);
+        //print(hasBomb);
     }
     public override void TakeDamage(Attack attacker, bool attackType = false)
     {
