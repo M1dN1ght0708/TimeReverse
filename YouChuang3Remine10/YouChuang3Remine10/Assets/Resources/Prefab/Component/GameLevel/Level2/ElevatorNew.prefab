@@ -514,7 +514,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2277570549209033767}
-  - component: {fileID: 1570082197301928818}
   m_Layer: 0
   m_Name: ElevatorNew
   m_TagString: Untagged
@@ -543,22 +542,8 @@ Transform:
   - {fileID: 2297526934721556194}
   - {fileID: 2373115394282390533}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1570082197301928818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6312716578504083024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d409dadec7c2f964a970c48bb07d61de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cageName: Cage1
-  deltaTime: 5
 --- !u!1 &6431854705646161335
 GameObject:
   m_ObjectHideFlags: 0
