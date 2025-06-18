@@ -13,7 +13,7 @@ public class L2CollectionManger : MonoBehaviour
     public GameObject collectCountUI;
     public GameObject collectTextObj;
     private Text collectTipText;
-    public bool[] collectedID;
+    public bool[] collectedID=new bool[6];
 
     private bool hasTrigger;
     private void Awake()

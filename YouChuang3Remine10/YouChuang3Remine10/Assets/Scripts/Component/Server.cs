@@ -28,7 +28,11 @@ public class Server : MonoBehaviour
     void Update()
     {
         if(L2CollectionManger.Instance.collectedID[this.id])
+        {
             this.hasCollect = true;
+            fTip.SetActive(false);
+        }    
+            
     }
     private void playerInteractServer(InputAction.CallbackContext context)
     {
