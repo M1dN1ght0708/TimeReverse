@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class Server : MonoBehaviour
 {
     // Start is called before the first frame update
+    public int id;
     public GameObject fTip;
     public PlayerControllerInput playerInput;
     public bool canF;
@@ -26,7 +27,8 @@ public class Server : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(L2CollectionManger.Instance.collectedID[this.id])
+            this.hasCollect = true;
     }
     private void playerInteractServer(InputAction.CallbackContext context)
     {
@@ -34,6 +36,7 @@ public class Server : MonoBehaviour
         {
             this.hasCollect = true;
             L2CollectionManger.Instance.L2CollectionCount++;
+            L2CollectionManger.Instance.collectedID[this.id] = true;
             fTip.SetActive(false);
             canF = false;
         }

@@ -9,10 +9,11 @@ public class L2CollectionManger : MonoBehaviour
     private static L2CollectionManger instance;
     public static L2CollectionManger Instance => instance;
 
-    public int L2CollectionCount = 0;
+    public  int L2CollectionCount = 0;
     public GameObject collectCountUI;
     public GameObject collectTextObj;
     private Text collectTipText;
+    public bool[] collectedID;
 
     private bool hasTrigger;
     private void Awake()
@@ -24,6 +25,7 @@ public class L2CollectionManger : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(this);
         }
         collectTipText = collectTextObj.GetComponent<Text>();
     }
