@@ -13,7 +13,7 @@ public class L2CollectionManger : MonoBehaviour
     public GameObject collectCountUI;
     public GameObject collectTextObj;
     private Text collectTipText;
-    public bool[] collectedID=new bool[6];
+    public bool[] collectedID;
 
     private bool hasTrigger;
     private void Awake()
@@ -28,6 +28,7 @@ public class L2CollectionManger : MonoBehaviour
             DontDestroyOnLoad(this);
         }
         collectTipText = collectTextObj.GetComponent<Text>();
+        collectedID=new bool[6] { false, false, false, false, false, false };
     }
     void Start()
     {

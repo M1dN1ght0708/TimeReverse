@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class Server : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int id;
+    public int id=0;
     public GameObject fTip;
     public PlayerControllerInput playerInput;
     public bool canF;
