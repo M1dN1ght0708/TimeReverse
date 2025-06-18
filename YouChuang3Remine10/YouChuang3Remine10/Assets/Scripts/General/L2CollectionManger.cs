@@ -16,6 +16,8 @@ public class L2CollectionManger : MonoBehaviour
     public bool[] collectedID;
 
     private bool hasTrigger;
+
+    public GameObject dialogueTrigger;
     private void Awake()
     {
         if (Instance != null)
@@ -42,6 +44,7 @@ public class L2CollectionManger : MonoBehaviour
         {
             hasTrigger = true;
             //´¥·¢ÊÂ¼þ
+            dialogueTrigger.SetActive(true);
         }
         if (hasTrigger)
             return;

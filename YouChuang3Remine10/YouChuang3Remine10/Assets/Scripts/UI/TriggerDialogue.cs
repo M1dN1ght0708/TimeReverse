@@ -11,6 +11,8 @@ public class TriggerDialogue : MonoBehaviour
     private PlayerController pController;
     private DialogueUIMgr dialogueUIMgr;
 
+    public GameObject afterDialogueTrigger;
+
     //public bool hasTips;
 
     private bool hasTrigger;
@@ -22,6 +24,7 @@ public class TriggerDialogue : MonoBehaviour
             dialogueUIMgr=other.GetComponentInChildren<DialogueUIMgr>();         
             pController.canDialogue = true;
             dialogueUIMgr.textAsset = this.textAsset;
+            dialogueUIMgr.afterDialogueTrigger = this.afterDialogueTrigger;
             if(finishedAsset!=null)
                 dialogueUIMgr.finishedTextAsset = this.finishedAsset;
             dialogueUIMgr.npc = this.npc;

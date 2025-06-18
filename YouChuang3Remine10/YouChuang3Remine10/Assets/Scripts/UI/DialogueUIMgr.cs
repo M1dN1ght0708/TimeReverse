@@ -30,6 +30,8 @@ public class DialogueUIMgr : MonoBehaviour
     public bool skip;
     public bool isShowing;
 
+    public GameObject afterDialogueTrigger;
+
 
     private void Awake()
     {
@@ -86,12 +88,19 @@ public class DialogueUIMgr : MonoBehaviour
     {
         if (index >= textList.Count)
         {
+
             dialogueBox.SetActive (false);
             isFinished = true;
             hasInit = false;
             index = 0;
             pController?.playerInput.GamePlay.Enable();
             pControllerNew?.playerInput.GamePlay.Enable();
+            if(this.afterDialogueTrigger != null)
+            {
+                this.afterDialogueTrigger.SetActive(true);
+                this.afterDialogueTrigger = null;
+            }                
+
             return;
         }
         if (!isShowing&&!skip)
@@ -120,6 +129,12 @@ public class DialogueUIMgr : MonoBehaviour
                 break;
             case "Alex:\r":
                 nameLabel.text = "Alex";
+                this.GetComponent<UITrack>().targetTrans = npc.transform;
+                dialogueBox.transform.position = Camera.main.WorldToScreenPoint(npc.transform.position + this.GetComponent<UITrack>().offset);
+                index++;
+                break;
+            case "Virus:\r":
+                nameLabel.text = "Virus";
                 this.GetComponent<UITrack>().targetTrans = npc.transform;
                 dialogueBox.transform.position = Camera.main.WorldToScreenPoint(npc.transform.position + this.GetComponent<UITrack>().offset);
                 index++;
