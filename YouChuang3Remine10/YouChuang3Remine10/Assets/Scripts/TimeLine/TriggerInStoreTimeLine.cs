@@ -24,7 +24,7 @@ public class TriggerInStoreTimeLine :TriggerTimeLine
             pController = other.GetComponent<PlayerController>();
             if (isOnce && !GameDataMgr.Instance.inStoreTimeLine)
             {
-                pController.playerInput.Disable();
+                //pController.playerInput.Disable();
                 GameDataMgr.Instance.inStoreTimeLine = true;
                 timeLineDirector.SetActive(true);
             }

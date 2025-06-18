@@ -31,7 +31,7 @@ public class DialogueUIMgr : MonoBehaviour
     public bool isShowing;
 
     public GameObject afterDialogueTrigger;
-
+    public GameObject afterDialogueHide;
 
     private void Awake()
     {
@@ -76,7 +76,7 @@ public class DialogueUIMgr : MonoBehaviour
                 tipObj.SetActive(false);
             pController?.playerInput.GamePlay.Disable();
             pControllerNew?.playerInput.GamePlay.Disable();
-            if (isFinished)
+            if (isFinished&&finishedTextAsset!=null)
                 InitTextAsset(finishedTextAsset);
             else
                 InitTextAsset(textAsset);
@@ -99,6 +99,8 @@ public class DialogueUIMgr : MonoBehaviour
             {
                 this.afterDialogueTrigger.SetActive(true);
                 this.afterDialogueTrigger = null;
+                this.afterDialogueHide.SetActive(false);
+                this.afterDialogueHide = null;
             }                
 
             return;
