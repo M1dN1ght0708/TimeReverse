@@ -17,4 +17,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Clinic.unity
     guid: a1b187d97586c104da95eae4c033ff3f
+  - enabled: 1
+    path: Assets/Scenes/LevelTwoBossFight.unity
+    guid: f047b963542962048acd47b89411203a
+  - enabled: 1
+    path: Assets/Scenes/LevelTwoDemo.unity
+    guid: 9e8b4763cf5843244b1684476d208d45
+  - enabled: 1
+    path: Assets/Scenes/ClinicNew.unity
+    guid: f4b590447cf982543a04b69c23c2bc87
+  - enabled: 1
+    path: Assets/Scenes/ClinicAfterBoss.unity
+    guid: 314936156f15a6a4ebd24291ce3f943d
   m_configObjects: {}

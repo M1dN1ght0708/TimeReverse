@@ -58,6 +58,7 @@ public class SpidertankTree : BehaviorTree.Tree
     public float waitTime;
     [Header("Dead")]
     public bool isDead;
+    public GameObject TalkObject;
 
     private void Awake()
     {
@@ -152,6 +153,10 @@ public class SpidertankTree : BehaviorTree.Tree
     public void GetDead()
     {
         isDead = true;
+        if (TalkObject != null)
+        {
+            TalkObject.SetActive(true);
+        }
     }
 
     public void Die()
