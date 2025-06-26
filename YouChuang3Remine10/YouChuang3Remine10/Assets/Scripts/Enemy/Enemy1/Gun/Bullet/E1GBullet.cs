@@ -10,6 +10,7 @@ public class E1GBullet : BaseGameLevel
 
     public float boomTime;
     public float boomTimeCounter;
+    public bool beStop;
     private void OnEnable()
     {
         boomTimeCounter = 0;
@@ -21,10 +22,12 @@ public class E1GBullet : BaseGameLevel
         boomTimeCounter += Time.deltaTime;
         if((isInRange&&PlayerController.isRangeStopTime)||PlayerController.isStopTime)
         {
+            beStop = true;
             StopTimeDo();
         }
         else
         {
+            beStop=false;
             currentSpeed = flySpeed;
         }
         if (boomTimeCounter >= boomTime)
@@ -41,7 +44,7 @@ public class E1GBullet : BaseGameLevel
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player")&&!this.beStop)
         {
             other.GetComponent<Character>()?.TakeDamage(this,true);
             PoolManager.Instance.PushObj("Bullet/EnemyBullet/E1GBullet", this.gameObject);

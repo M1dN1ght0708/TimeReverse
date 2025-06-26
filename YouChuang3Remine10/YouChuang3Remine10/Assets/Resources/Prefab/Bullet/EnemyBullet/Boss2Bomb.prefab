@@ -102,7 +102,7 @@ MonoBehaviour:
   stopTimeRange: {fileID: 0}
   isInRange: 0
   throwSpeed: 10
-  hideTime: 5
+  hideTime: 10
   nowExistTime: 0
   maxFlyTime: 15
   moveDir: {x: 0, y: 0, z: 0}

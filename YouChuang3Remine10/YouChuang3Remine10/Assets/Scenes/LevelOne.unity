@@ -2339,8 +2339,8 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 3cf1a7aa2df915d4cb075010a212c67c, type: 3}
   finishedAsset: {fileID: 4900000, guid: 3cf1a7aa2df915d4cb075010a212c67c, type: 3}
   npc: {fileID: 0}
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides: []
 --- !u!114 &212436520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3793,7 +3793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361284333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 206.3, y: 7.6, z: 26.900002}
+  m_LocalPosition: {x: -77, y: 3.5, z: 26.900002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3814,7 +3814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ConfineMode: 1
-  m_BoundingVolume: {fileID: 0}
+  m_BoundingVolume: {fileID: 1260442842}
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
@@ -8404,8 +8404,8 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: b3aa924f2ab637b49b26ff6315cc5750, type: 3}
   finishedAsset: {fileID: 0}
   npc: {fileID: 775174363}
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides: []
 --- !u!65 &775174365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10101,8 +10101,8 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 1973c3bff7825384789f6758c5dfdbb3, type: 3}
   finishedAsset: {fileID: 4900000, guid: 1973c3bff7825384789f6758c5dfdbb3, type: 3}
   npc: {fileID: 1501675846}
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides: []
 --- !u!65 &946797023
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10225,7 +10225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 206.3, y: 7.6, z: 26.900002}
+  m_LocalPosition: {x: -77, y: 3.5, z: 26.900002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12165,8 +12165,8 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 237ae7ffe540bf24aa925bd6dd75171f, type: 3}
   finishedAsset: {fileID: 4900000, guid: 237ae7ffe540bf24aa925bd6dd75171f, type: 3}
   npc: {fileID: 0}
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides: []
 --- !u!1 &1222291205
 GameObject:
   m_ObjectHideFlags: 0
@@ -12864,6 +12864,23 @@ Transform:
   m_Father: {fileID: 896730407}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1279762118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2194576750545017745, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
+  m_PrefabInstance: {fileID: 1963698228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1279762123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279762118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa77adc2e24353e43bce0763015c33f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1282110360
 GameObject:
   m_ObjectHideFlags: 0
@@ -18371,6 +18388,7 @@ GameObject:
   - component: {fileID: 1892333299}
   - component: {fileID: 1892333298}
   - component: {fileID: 1892333297}
+  - component: {fileID: 1892333300}
   m_Layer: 13
   m_Name: AfterTankDialogue
   m_TagString: Untagged
@@ -18429,8 +18447,10 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 996c7ede1b4b3ba46998ec0bbeccacc1, type: 3}
   finishedAsset: {fileID: 4900000, guid: 996c7ede1b4b3ba46998ec0bbeccacc1, type: 3}
   npc: {fileID: 0}
-  afterDialogueTrigger: {fileID: 51279640}
-  afterDialogueHide: {fileID: 1892333295}
+  afterDialogueTriggers:
+  - {fileID: 51279640}
+  afterDialogueHides:
+  - {fileID: 1892333295}
 --- !u!65 &1892333299
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18450,8 +18470,20 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0948515, y: 5.403182, z: 1.4213028}
-  m_Center: {x: 2.5340705, y: 2.201591, z: 0.1259613}
+  m_Size: {x: 37.204956, y: 2.384798, z: 1.4213028}
+  m_Center: {x: -5.3282166, y: 0.692399, z: 0.1259613}
+--- !u!114 &1892333300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892333295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af48dce382461b248bb410ed8f64ee7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1907606568
 GameObject:
   m_ObjectHideFlags: 0
@@ -18991,9 +19023,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1567421725568819375, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2194576750545017745, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
       propertyPath: m_Name
       value: ClinicAfterBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614718029029064502, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620624387797901788, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942124155900268113, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
+      propertyPath: m_Size.x
+      value: 39.706696
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942124155900268113, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
+      propertyPath: m_Center.x
+      value: -7.8388977
       objectReference: {fileID: 0}
     - target: {fileID: 7166647517566185493, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
       propertyPath: tipObj
@@ -19027,10 +19079,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7166647517566185493, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2194576750545017745, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1279762123}
   m_SourcePrefab: {fileID: 100100000, guid: b2fe0e710fae08846a4c4e9e70ec4efe, type: 3}
 --- !u!1 &1973520373
 GameObject:
@@ -19848,8 +19904,8 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 2d1f1d0b501942e4aa2ba6249f1d3c80, type: 3}
   finishedAsset: {fileID: 4900000, guid: 2d1f1d0b501942e4aa2ba6249f1d3c80, type: 3}
   npc: {fileID: 0}
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides: []
 --- !u!1 &2028069940 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5265601978717295679, guid: d0b6b355da955a048bf397213d7e1fbc, type: 3}
@@ -21729,11 +21785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7360232214274273230, guid: 91c0af19b83bb7c45ba5062227754d7b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 206.3
+      value: -77
       objectReference: {fileID: 0}
     - target: {fileID: 7360232214274273230, guid: 91c0af19b83bb7c45ba5062227754d7b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7360232214274273230, guid: 91c0af19b83bb7c45ba5062227754d7b, type: 3}
       propertyPath: m_LocalPosition.z

@@ -16,11 +16,13 @@ public class Server : MonoBehaviour
     {
         playerInput = new PlayerControllerInput();
         playerInput.UI.Interact.started += playerInteractServer;
+
     }
 
 
     void Start()
     {
+        this.hasCollect = L2CollectionManger.Instance.collectedID[this.id];
         this.playerInput.Enable();
     }
 

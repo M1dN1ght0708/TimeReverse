@@ -17,10 +17,22 @@ public class L2CollectionManger : MonoBehaviour
 
     private bool hasTrigger;
 
-    public GameObject dialogueTrigger;
+    public GameObject[] finishShows;
+    public GameObject[] afterBeginDialogueHides;
+    public GameObject finishCollectDialogue;
+
+    public bool hasBeginDialogue;
+
+    public GameObject player;
+    public GameObject npc;
+    public Vector3 npcOffset;
+
+    public GameObject beforeFinishCollectTip;
+    public GameObject beforeFinishCollectWall;
+
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null )
         {
             Destroy(gameObject);
         }
@@ -40,27 +52,40 @@ public class L2CollectionManger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(L2CollectionCount==6&&!hasTrigger)
+        if (L2CollectionCount > 0)
+        {
+            collectCountUI.SetActive(true);
+            collectTipText.text = "当前收集进度：" + L2CollectionCount + "/6";
+
+        }
+        if (!hasBeginDialogue)
+        {
+            for(int i = 0;i<afterBeginDialogueHides.Length;i++)
+            {
+                afterBeginDialogueHides[i].SetActive(true);
+            }
+            hasBeginDialogue = true;
+        }
+        if(L2CollectionCount == 6)
+        {
+            beforeFinishCollectTip.SetActive(false);
+            beforeFinishCollectWall.SetActive(false);
+        }
+        if (L2CollectionCount==6&&!hasTrigger)
         {
             hasTrigger = true;
             //触发事件
-            dialogueTrigger.SetActive(true);
+            npc.SetActive(true);
+            npc.transform.position=player.transform.position+new Vector3(player.transform.localScale.x*npcOffset.x,npcOffset.y,0);
+            finishCollectDialogue.SetActive(true);
+            L2CollectionCount = 0;
+
         }
-        if (hasTrigger)
-            return;
-        if(L2CollectionCount>0)
-        {
-            collectCountUI.SetActive(true);
-            //if (collectTipText == null)
-            //{
-            //    collectTipText = collectTextObj.GetComponent<Text>();
-            //}
-            collectTipText.text = "当前收集进度：" + L2CollectionCount + "/6";
-        }
-        else
-        {
-            collectCountUI.SetActive(false);
-        }
+       
+        //else
+        //{
+        //    collectCountUI.SetActive(false);
+        //}
 
 
     }

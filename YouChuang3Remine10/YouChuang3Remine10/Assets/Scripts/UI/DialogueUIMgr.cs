@@ -30,11 +30,14 @@ public class DialogueUIMgr : MonoBehaviour
     public bool skip;
     public bool isShowing;
 
-    public GameObject afterDialogueTrigger;
-    public GameObject afterDialogueHide;
+    public GameObject[] afterDialogueTriggers;
+    public GameObject[] afterDialogueHides;
 
     private void Awake()
     {
+        afterDialogueTriggers = new GameObject[10];
+        afterDialogueHides = new GameObject[10];
+
         pController=this.GetComponentInParent<PlayerController>();
         pControllerNew=this.GetComponentInParent<PlayerControllerNew>();
 
@@ -95,13 +98,28 @@ public class DialogueUIMgr : MonoBehaviour
             index = 0;
             pController?.playerInput.GamePlay.Enable();
             pControllerNew?.playerInput.GamePlay.Enable();
-            if(this.afterDialogueTrigger != null)
+            if(this.afterDialogueTriggers.Length>0)
             {
-                this.afterDialogueTrigger.SetActive(true);
-                this.afterDialogueTrigger = null;
-                this.afterDialogueHide.SetActive(false);
-                this.afterDialogueHide = null;
-            }                
+                for(int i = 0;i<afterDialogueTriggers.Length;i++)
+                {
+                    if (this.afterDialogueTriggers[i] != null)
+                    {
+                        this.afterDialogueTriggers[i].SetActive(true);
+                        this.afterDialogueTriggers[i] = null;
+                    }
+                }
+            }
+            if (this.afterDialogueHides.Length > 0)
+            {
+                for (int i = 0; i < afterDialogueHides.Length; i++)
+                {
+                    if (this.afterDialogueHides[i] != null)
+                    {
+                        this.afterDialogueHides[i].SetActive(false);
+                        this.afterDialogueHides[i] = null;
+                    }
+                }
+            }
 
             return;
         }

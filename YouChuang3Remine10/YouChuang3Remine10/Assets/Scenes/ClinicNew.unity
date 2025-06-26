@@ -948,8 +948,8 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: aa42f0cc10d61ea4089b5ad3c56e45ac, type: 3}
   finishedAsset: {fileID: 4900000, guid: aa42f0cc10d61ea4089b5ad3c56e45ac, type: 3}
   npc: {fileID: 1618633298}
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides: []
 --- !u!65 &259983737
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1292,8 +1292,9 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 95fc66cf7bb57374f8244ccad9eb02f6, type: 3}
   finishedAsset: {fileID: 0}
   npc: {fileID: 1618633298}
-  afterDialogueTrigger: {fileID: 1813342403}
-  afterDialogueHide: {fileID: 292612638}
+  afterDialogueTriggers:
+  - {fileID: 1813342403}
+  afterDialogueHides: []
 --- !u!65 &292612640
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2875,8 +2876,9 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 67fc4a5f3b05fed4c95a3b19f881c8d6, type: 3}
   finishedAsset: {fileID: 4900000, guid: aa42f0cc10d61ea4089b5ad3c56e45ac, type: 3}
   npc: {fileID: 1618633298}
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides:
+  - {fileID: 839422472}
 --- !u!65 &839422474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4328,8 +4330,8 @@ MonoBehaviour:
   isFinished: 0
   skip: 0
   isShowing: 0
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides: []
 --- !u!114 &1254187745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5575,8 +5577,8 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: aa42f0cc10d61ea4089b5ad3c56e45ac, type: 3}
   finishedAsset: {fileID: 4900000, guid: aa42f0cc10d61ea4089b5ad3c56e45ac, type: 3}
   npc: {fileID: 1618633298}
-  afterDialogueTrigger: {fileID: 0}
-  afterDialogueHide: {fileID: 0}
+  afterDialogueTriggers: []
+  afterDialogueHides: []
 --- !u!65 &1764090146
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6985,8 +6987,9 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 153f986275c9ed7449db5548d9bbd5b6, type: 3}
   finishedAsset: {fileID: 0}
   npc: {fileID: 1618633298}
-  afterDialogueTrigger: {fileID: 694362253}
-  afterDialogueHide: {fileID: 2095494033}
+  afterDialogueTriggers:
+  - {fileID: 694362253}
+  afterDialogueHides: []
 --- !u!65 &2095494035
 BoxCollider:
   m_ObjectHideFlags: 0

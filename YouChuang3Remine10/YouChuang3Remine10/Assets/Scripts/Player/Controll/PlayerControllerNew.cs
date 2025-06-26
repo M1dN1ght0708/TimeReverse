@@ -47,6 +47,7 @@ public class PlayerControllerNew:PlayerController
         //¶Ô»°
         if (canDialogue)
         {
+            this.playerInput.GamePlay.Disable();
             EventCenter.Instance.TriggerEvent("TriggerDialogue", null);
         }
     }

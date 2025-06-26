@@ -652,6 +652,7 @@ public class PlayerController : MonoBehaviour
         //对话
         if (canDialogue) 
         {
+            this.playerInput.GamePlay.Disable();
             EventCenter.Instance.TriggerEvent("TriggerDialogue",null);
         }
     }
